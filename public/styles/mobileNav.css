@@ -1,0 +1,42 @@
+.mobile-nav-menu{
+	position:fixed;
+	width:100%;
+	height:100%;
+	z-index:998;
+	left:-100%;
+	transition:all 300ms linear;
+}
+
+.mobile-nav-btn{
+	top:16px;
+	right:15px;
+	z-index:999;
+	display:block;
+	cursor:pointer;
+	position:absolute;
+}
+
+.mobile-nav-link{
+	display:block;
+	text-decoration:none;
+	text-transform:uppercase;
+	margin:0 !important;
+	padding:10px !important;
+	font:bold 14px "Segoe UI", Arial, sans-serif;
+}
+
+.mobile-nav-link:hover{
+	color:white;
+	background-color:grey;
+}
+
+.mobile-nav-menu .nav-links{
+	border:none !important;
+}
+
+.mobile-nav-menu .nav-links a{
+}
+
+.mobile-nav-menu .nav-blank{
+	opacity:0.5;
+}

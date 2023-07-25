@@ -1,0 +1,115 @@
+.la-modal-block{
+	display:none;
+	position:fixed; /* Stay in place */
+	z-index:97; /* Sit on top */
+	left:0;
+	top:0;
+	width:100%; /* Full width */
+	height:100%; /* Full height */
+	overflow:auto; /* Enable scroll if needed */
+}
+
+/* The Modal (background) */
+.la-modal-back{
+	position:fixed; /* Stay in place */
+	z-index:98; /* Sit on top */
+	left:0;
+	top:0;
+	width:100%; /* Full width */
+	height:100%; /* Full height */
+	overflow:auto; /* Enable scroll if needed */
+	background-color:#000000;
+	padding-top:50px;
+	opacity:0.8;
+}
+
+/* The Modal (front) */
+.la-modal{
+	position:absolute; /* Stay in place */
+	z-index:99; /* Sit on top */
+	left:0;
+	top:0;
+	width:100%; /* Full width */
+	margin:auto;
+	height:100%; /* Full height */
+	overflow:auto; /* Enable scroll if needed */
+	padding-top:50px;
+}
+
+/* The Modal Close Button (x) */
+.la-modal-close{
+	position:absolute;
+	right:35px;
+	top:15px;
+	font-size:40px;
+	font-weight:bold;
+	color:#f1f1f1;
+}
+
+.la-modal-close:hover,
+.la-modal-close:focus{
+	color:#f44336;
+	cursor:pointer;
+}
+
+/* Modal Content/Box */
+.la-modal-content{
+	background-color:#fefefe;
+	margin:5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+	border:1px solid #888;
+	width:50%; /* Could be more or less, depending on screen size */
+	max-width:600px;
+}
+
+/* Add padding and center-align text to the container */
+.la-modal-container{
+	padding:32px 16px;
+	text-align:center;
+}
+
+.la-modal-head{
+	font-family:"Segoe UI", Arial, sans-serif;
+	font-size:42px;
+}
+
+.la-modal-text{
+	font-family:Verdana, sans-serif;
+	font-size:15px;
+}
+
+/* Set a style for all buttons */
+.la-modal-button{
+	background-color:#04AA6D;
+	color:white;
+	padding:14px 20px;
+	margin:8px 0;
+	border:none;
+	cursor:pointer;
+	opacity:0.75;
+	float:left;
+	width:50%;
+	font-family:Verdana, sans-serif;
+	font-size:15px;
+}
+
+.la-modal-button:hover{
+	opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.la-modal-cancelBtn, .la-modal-deleteBtn{
+
+}
+
+/* Style the horizontal ruler */
+.la-modal-hr{
+	border:1px solid #f1f1f1;
+	margin-bottom:25px;
+}
+
+/* Clear floats */
+.la-modal-clearfix::after{
+	content:"";
+	clear:both;
+	display:table;
+}

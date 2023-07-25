@@ -1,0 +1,31 @@
+.menu-bar1, .menu-bar2, .menu-bar3{
+	width:35px;
+	height:5px;
+	margin:6px 0;
+	transition:0.4s;
+}
+
+.menu-toggle .menu-bar1{
+	transform:translate(0, 11px) rotate(-45deg);
+}
+
+.menu-toggle .menu-bar2{
+	opacity:0;
+}
+
+.menu-toggle .menu-bar3{
+	transform:translate(0, -11px) rotate(45deg);
+}
+
+.nav-links{
+	text-decoration:none;
+	text-transform:uppercase;
+	margin:0 !important;
+	padding:10px !important;
+	font:bold 18px "Segoe UI", Arial, sans-serif;
+}
+
+.nav-links:hover{
+	color:black;
+	background-color:white;
+}

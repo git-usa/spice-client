@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	
+	<script>
+		const setOpacity = (value) => {
+			document.getElementById("set").style.opacity = value;
+		};
+		
+		const onload = () => {
+			window.onscroll = () => {
+				const rest = document.getElementById("set");
+				if(!rest) return;
+				rest.style.opacity = window.scrollY > 50 ? 0.5 : 1;
+				// document.getElementById("set").style.opacity = 0.5;
+			};
+		};
+	</script>
+	<style>
+		.set{
+			width:400px;
+			background-color:black;
+			color:white;
+			margin:10px 0;
+			padding:30px;
+			font-size:36px;
+			font-weight:bold;
+			font-family:"Segoe UI", Arial, sans-serif;
+			opacity:1;
+			transition:all 500ms linear;
+		}
+
+		.set:hover{
+			color:yellow;
+			opacity:0.5;
+			/*width:800px;*/
+		}
+	</style>
+</head>
+<body onload="onload()" style="padding-bottom:300px; height:2000px;">
+
+<button onclick="setOpacity(0.5)">Start</button>
+<button onclick="setOpacity(1)">Reset</button>
+
+<div class="set" id="set">Hello Text!</div>
+
+</body>
+</html>
