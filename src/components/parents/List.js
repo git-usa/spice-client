@@ -1,13 +1,13 @@
 import Blank from "./Blank";
 import {useEffect, useState} from "react";
-import ErrorBoundary from "./ErrorBoundary";
-import ResultBar from "../singles/ResultBar";
+import WrapError from "./WrapError";
 import ListTeams from "../chidlren/Teams/ListTeams";
 import JaxList from "../../modules/ajaxCalls/JaxList";
 import ListPeople from "../chidlren/People/ListPeople";
 import {_ladEleById} from "../../modules/scripts/_lady";
 import ListMessages from "../chidlren/Messages/ListMessages";
 import ListProjects from "../chidlren/Projects/ListProjects";
+import ResultBar, {staticResultBar} from "../singles/ResultBar";
 import type TypeResult from "../../modules/interfaces/TypeResult";
 import type {CbJaxHandleComponentJax} from "../../modules/interfaces/TypeJax";
 import {lat_isValidArray, lat_isValidObject} from "../../modules/scripts/labject";
@@ -18,48 +18,61 @@ import {lat_isValidArray, lat_isValidObject} from "../../modules/scripts/labject
  * @param jax
  */
 const List = (jax : CbJaxHandleComponentJax) => {
-	const btnReloadId                      = "btnReload";
-	const init : TypeResult                = {text : "", type : ""};
-	const [reload, setReload]              = useState();
-	const [component, setComponent]        = useState(<Blank/>);
-	const [result : TypeResult, setResult] = useState(init);
+	console.count("LIST RENDERED");
+	const btnReloadId               = "btnReload";
+	const [reload, setReload]       = useState();
+	const [component, setComponent] = useState(<Blank/>);
+	
+	const showResult = ({text, type} : TypeResult) => {
+		console.info("SET RESULT");
+		document.getElementById("setResult").innerHTML = staticResultBar(text, type);
+	};
 	
 	useEffect(() => {
-		setComponent(<Blank/>);
+		// setComponent(<Blank/>);
 		JaxList({by : jax.by, of : jax.of}, (result, data) => {
-			if(result.type !== "info")
-				_ladEleById(btnReloadId).disabled = false;
 			
-			if(result.type !== "pass"){
-				setResult(result);
+			{
+				console.info("SHOWING RESULT");
+				showResult(result);
+			}
+			
+			if(result.type !== "info"){
+				console.info("BUTTON ENABLED");
+				_ladEleById(btnReloadId).disabled = false;
+			}
+			
+			if(!data){
+				console.info("NO DATA. RETURN");
 				return;
 			}
 			
 			if(!lat_isValidArray(data, 0) && !lat_isValidObject(data)){
-				setResult({text : "No Records Found to List ", type : "error"});
+				console.info("NOT VALID DATA");
+				showResult({text : "No Records Found to List ", type : "error"});
 				return;
 			}
 			
-			setResult(result);
 			// console.info(data);
 			// return;
 			
+			console.info("SET COMPONENT");
 			switch(jax.of){
 				case "people":
-					setComponent(<ListPeople cbComponent={jax.cbHandler} people={data} cbResult={setResult}/>);
+					setComponent(<ListPeople cbResult={showResult} cbComponent={jax.cbHandler} people={data}/>);
 					break;
 				case "project":
-					setComponent(<ListProjects projects={data} cbResult={setResult} cbComponent={jax.cbHandler}/>);
+					setComponent(<ListProjects cbResult={showResult} projects={data} cbComponent={jax.cbHandler}/>);
 					break;
 				case"team":
-					setComponent(<ListTeams teams={data} cbResult={setResult} cbComponent={jax.cbHandler}/>);
+					setComponent(<ListTeams cbResult={showResult} teams={data} cbComponent={jax.cbHandler}/>);
 					break;
 				case "message":
 					setComponent(<ListMessages messages={data}/>);
 					break;
 				default:
 					console.info("RESULT 5");
-					setResult({text : `No Component to List ${jax.of}`, type : "error"});
+					showResult({text : `No Component to List ${jax.of}`, type : "error"});
 			}
 			
 		});
@@ -72,17 +85,15 @@ const List = (jax : CbJaxHandleComponentJax) => {
 	
 	return <>
 		<div className={"la-container flex-center-vertical"}>
-			<div className={"la-l8 la-s100"}>
-				<ResultBar text={result.text} type={result.type}/>
-			</div>
+			<div className={"la-l8 la-s100"} id={"setResult"}></div>
 			<div className={"la-l2 la-s10 w3-right-align"}>
 				<button id={btnReloadId} className={"w3-button w3-khaki w3-ripple"} onClick={reloadList}>Reload List</button>
 			</div>
 		</div>
 		<div>
-			<ErrorBoundary fallback={<ResultBar text={"Some Error Occurred while Loading Component. Check Console."} type={"error"}/>}>
-				{component}
-			</ErrorBoundary>
+			<WrapError
+				component={component}
+				fallback={<ResultBar text={"Some Error In Loading List Component. Check Console."} type={"error"}/>}/>
 		</div>
 	</>;
 };

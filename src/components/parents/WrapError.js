@@ -8,9 +8,15 @@ class ErrorBoundary extends Component{
 	
 	static getDerivedStateFromError(error){
 		// Update state so the next render will show the fallback UI.
-		console.info("LOGGING ERROR");
+		console.info("ERROR CAUGHT");
 		console.error(error);
 		return {hasError : true};
+	}
+	
+	componentDidCatch(error : Error, errorInfo : React.ErrorInfo){
+		console.info("LOGGING ERROR");
+		console.info(error);
+		console.info(errorInfo);
 	}
 	
 	render(){
@@ -22,4 +28,10 @@ class ErrorBoundary extends Component{
 	}
 }
 
-export default ErrorBoundary;
+export const WrapError = ({component, fallback}) => {
+	return <ErrorBoundary fallback={fallback}>
+		{component}
+	</ErrorBoundary>;
+};
+
+export default WrapError;

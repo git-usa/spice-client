@@ -12,7 +12,7 @@ import ProfileTeam from "../chidlren/Teams/ProfileTeam";
 import BlankComponent from "../singles/BlankComponent";
 import {ModalCompose} from "../containers/ModalCompose";
 import JaxCompose from "../../modules/ajaxCalls/JaxCompose";
-import ErrorBoundary from "./ErrorBoundary";
+import WrapError from "./WrapError";
 
 interface Type{
 	data : any;
@@ -122,9 +122,9 @@ const Profile = (jax : CbJaxHandleComponentJax) => {
 			</div>
 		</div>
 		<div>
-			<ErrorBoundary fallback={<ResultBar text={"Some Error Occurred. Check Console."} type={"error"}/>}>
+			<WrapError fallback={<ResultBar text={"Some Error Occurred. Check Console."} type={"error"}/>}>
 				{component}
-			</ErrorBoundary>
+			</WrapError>
 		</div>
 	</>;
 };
