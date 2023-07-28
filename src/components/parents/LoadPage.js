@@ -1,8 +1,8 @@
 import {useEffect} from "react";
 
 const LoadPage = (props : { message : string, addClass? : string }) => {
+	console.count("LOAD PAGE RENDER")
 	const message = props.message;
-	
 	useEffect(() => {
 		          document.getElementById("root").style.height = "100%";
 	          },

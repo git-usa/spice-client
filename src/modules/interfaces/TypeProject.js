@@ -1,7 +1,7 @@
 export interface TypeProjectCreate{
 	name : string;
 	category : string;
-	peopleid : string;
+	manager : string;
 	brief : string;
 }
 

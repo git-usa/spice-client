@@ -13,7 +13,7 @@ interface Type{
 }
 
 const ListPeople = (props : Type) => {
-	console.info("SHOW PEOPLE LIST RENDERED");
+	console.count("LIST PEOPLE RENDERED");
 	
 	const people      = props.people;
 	const cbResult    = props.cbResult;
@@ -39,8 +39,9 @@ const ListPeople = (props : Type) => {
 			}
 		};
 		
-		const table = _l(tableId)._replace()._classes("w3-table-all");
-		table._showData(people, null, "name role login projects teams createdAt", onShow, null, true, {createdAt : {input : "date"}});
+		const table    = _l(tableId)._replace()._classes("w3-table-all");
+		const includes = "name role login projects teams createdAt";
+		table._showData(people, null, includes, onShow, null, true, {createdAt : {input : "date"}});
 		
 	}, []);
 	

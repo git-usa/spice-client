@@ -1,10 +1,11 @@
-import type TypeResult, {HandlerResult} from "../../modules/interfaces/TypeResult";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ResultBar from "../singles/ResultBar";
-import {InpMessage, RefMessage, RefSubject} from "../singles/CliInputs";
+import {RefMessage, RefSubject} from "../singles/CliInputs";
+import type TypeResult, {HandlerResult} from "../../modules/interfaces/TypeResult";
 
-export const ModalCompose = (props : { cbYes : (setResult : HandlerResult)=>void }) => {
+export const ModalCompose = (props : { cbYes : (setResult : HandlerResult)=>void, subject? : string, carry? : any }) => {
 	
+	const carry   = props.carry;
 	const cbYes   = props.cbYes;
 	const modalId = "modalCompose";
 	
@@ -22,6 +23,10 @@ export const ModalCompose = (props : { cbYes : (setResult : HandlerResult)=>void
 	const subject = useRef("");
 	const message = useRef("");
 	
+	useEffect(() => {
+		if(subject.current) subject.current.value = props.subject;
+	}, [props.subject]);
+	
 	return <div id={modalId} className={"la-modal-block"}>
 		<div id={"modCompBack"} className={"la-modal-back"}></div>
 		<div id="modComp" className="la-modal">
@@ -33,12 +38,12 @@ export const ModalCompose = (props : { cbYes : (setResult : HandlerResult)=>void
 					<p className={"la-modal-text"}>Please enter your message to continue</p>
 					
 					<div className={boxClass}>
-						<RefSubject required={true} ref={subject}/>
+						<RefSubject required={true} ref={subject} value={props.subject}/>
 						<label className={labClass}>Subject</label>
 					</div>
 					
 					<div className={boxClass}>
-						<RefMessage required={true} ref={message}/>
+						<RefMessage required={true} ref={message} value={""}/>
 						<label className={labClass}>Message</label>
 					</div>
 					
@@ -47,7 +52,7 @@ export const ModalCompose = (props : { cbYes : (setResult : HandlerResult)=>void
 						<button id={"btnCompYes"}
 						        type="button"
 						        className={btnClass("w3-red")}
-						        onClick={(e) => cbYes(subject.current.value, message.current.value, setResult)}>Compose
+						        onClick={() => cbYes(subject.current.value, message.current.value, setResult, carry)}>Compose
 						</button>
 					</div>
 					

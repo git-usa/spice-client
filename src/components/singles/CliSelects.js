@@ -16,5 +16,5 @@ export const SelProject = (props : { projectList : TypeProject[] }) => {
 		return <option key={`selProject${v._id}`} value={v._id} className={"la-capital"}>{`${v.name} | ${v.category}`}</option>;
 	});
 	
-	return <select id={"projectid"}>{optionList}</select>;
+	return <select id={"project"}>{optionList}</select>;
 };

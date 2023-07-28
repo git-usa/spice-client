@@ -1,10 +1,11 @@
 import type TypeResult from "../../modules/interfaces/TypeResult";
 
-const ResultBar = (props: TypeResult) => {
+const ResultBar = (props : TypeResult) => {
 	// console.info("RESULT BAR RENDERED");
+	// console.count("RESULT BAR RENDERED");
 	
 	const colorClass = (() => {
-		switch (props.type && props.type.toLowerCase()) {
+		switch(props.type && props.type.toLowerCase()){
 			case "error":
 				return "la-error";
 			case "info":
@@ -15,6 +16,7 @@ const ResultBar = (props: TypeResult) => {
 				return "w3-white";
 		}
 	})();
+	
 	
 	return <div id={props.id} className={`la-shrink ${colorClass}`}>{props.text}</div>;
 };

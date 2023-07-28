@@ -7,6 +7,9 @@ import AppHome from "../chidlren/AppChildren/AppHome";
 import type {HandleComponentJax, TypeJax, CbComponentJax} from "../../modules/interfaces/TypeJax";
 
 const useComponent : CbComponentJax = (name : string, jax : TypeJax, cbComponentJax : HandleComponentJax) => {
+	console.clear();
+	console.info(`Using Component : ${name}`);
+	
 	switch(name){
 		case "blank":
 			return <Blank/>;

@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Test from "./components/testers/Test";
 
 function App(){
+	console.count("APP RENDER");
 	return <Router>
 		<Routes>
 			<Route path={"/"} element={<Home/>}/>;

@@ -1,26 +1,24 @@
-import {useEffect, useState} from "react";
-import type TypeResult from "../../modules/interfaces/TypeResult";
-import ResultBar from "../singles/ResultBar";
-import JaxList from "../../modules/ajaxCalls/JaxList";
-import type {CbJax} from "../../modules/interfaces/TypeJax";
-import {lat_isValidArray} from "../../modules/scripts/labject";
 import Blank from "./Blank";
-import {_ladEleById} from "../../modules/scripts/_lady";
-import ListPeople from "../chidlren/People/ListPeople";
-import ListProjects from "../chidlren/Projects/ListProjects";
+import {useEffect, useState} from "react";
+import ErrorBoundary from "./ErrorBoundary";
+import ResultBar from "../singles/ResultBar";
 import ListTeams from "../chidlren/Teams/ListTeams";
-import ListMessages from "../chidlren/People/ListMessages";
+import JaxList from "../../modules/ajaxCalls/JaxList";
+import ListPeople from "../chidlren/People/ListPeople";
+import {_ladEleById} from "../../modules/scripts/_lady";
+import ListMessages from "../chidlren/Messages/ListMessages";
+import ListProjects from "../chidlren/Projects/ListProjects";
+import type TypeResult from "../../modules/interfaces/TypeResult";
+import type {CbJaxHandleComponentJax} from "../../modules/interfaces/TypeJax";
+import {lat_isValidArray, lat_isValidObject} from "../../modules/scripts/labject";
 
 /**
  *
  * @constructor
  * @param jax
  */
-const List = (jax : CbJax) => {
-	
-	console.info(jax);
-	const btnReloadId = "btnReload";
-	
+const List = (jax : CbJaxHandleComponentJax) => {
+	const btnReloadId                      = "btnReload";
 	const init : TypeResult                = {text : "", type : ""};
 	const [reload, setReload]              = useState();
 	const [component, setComponent]        = useState(<Blank/>);
@@ -29,14 +27,22 @@ const List = (jax : CbJax) => {
 	useEffect(() => {
 		setComponent(<Blank/>);
 		JaxList({by : jax.by, of : jax.of}, (result, data) => {
-			setResult(result);
-			_ladEleById(btnReloadId).disabled = false;
-			if(!lat_isValidArray(data, 0)) return;
+			if(result.type !== "info")
+				_ladEleById(btnReloadId).disabled = false;
 			
-			if(data.length === 0){
-				setResult({text : `No Records Found to List ${jax.of}`, type : "error"});
+			if(result.type !== "pass"){
+				setResult(result);
 				return;
 			}
+			
+			if(!lat_isValidArray(data, 0) && !lat_isValidObject(data)){
+				setResult({text : "No Records Found to List ", type : "error"});
+				return;
+			}
+			
+			setResult(result);
+			// console.info(data);
+			// return;
 			
 			switch(jax.of){
 				case "people":
@@ -49,9 +55,10 @@ const List = (jax : CbJax) => {
 					setComponent(<ListTeams teams={data} cbResult={setResult} cbComponent={jax.cbHandler}/>);
 					break;
 				case "message":
-					setComponent(<ListMessages messages={data}/>)
+					setComponent(<ListMessages messages={data}/>);
 					break;
 				default:
+					console.info("RESULT 5");
 					setResult({text : `No Component to List ${jax.of}`, type : "error"});
 			}
 			
@@ -72,7 +79,11 @@ const List = (jax : CbJax) => {
 				<button id={btnReloadId} className={"w3-button w3-khaki w3-ripple"} onClick={reloadList}>Reload List</button>
 			</div>
 		</div>
-		<div>{component}</div>
+		<div>
+			<ErrorBoundary fallback={<ResultBar text={"Some Error Occurred while Loading Component. Check Console."} type={"error"}/>}>
+				{component}
+			</ErrorBoundary>
+		</div>
 	</>;
 };
 

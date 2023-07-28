@@ -11,13 +11,13 @@ export const AjaxPostCall = (url, service, params, cbResult : (result : TypeResu
 				const response : TypeResponse | string = lats_toJson(request.response, "result message");
 				
 				if(typeof response === "string"){
-					console.info("ERROR IN RESPONSE CONVERSION");
+					console.error("ERROR IN RESPONSE CONVERSION");
 					cbResult({text : response, type : "error"});
 					return;
 				}
 				
 				if(!response.result){
-					console.info("NEGATIVE RESPONSE RECEIVED");
+					console.error("NEGATIVE RESPONSE RECEIVED");
 					cbResult({text : response.message, type : "error"}, response.data || false);
 					return;
 				}

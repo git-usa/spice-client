@@ -26,8 +26,6 @@ const AppLogin = (props : { result : TypeResult, cbAfterIn : (user : TypePeople)
 		}
 		
 		const inputs = modal._getInputs();
-		console.info(inputs);
-		
 		if(typeof inputs === "string"){
 			setResult({text : inputs, type : "error"});
 			return;
@@ -43,8 +41,6 @@ const AppLogin = (props : { result : TypeResult, cbAfterIn : (user : TypePeople)
 				document.getElementById("btnLoginYes").disabled    = false;
 				document.getElementById("btnLoginCancel").disabled = false;
 			} else{
-				console.info("Login Done");
-				console.info(data);
 				// window.location.href = "/app";
 				props.cbAfterIn(data);
 			}

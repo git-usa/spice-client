@@ -1,10 +1,10 @@
 import {useState} from "react";
-import type TypeResult from "../../modules/interfaces/TypeResult";
+import useComponent from "./useComponent";
 import AppNavBar from "../containers/AppNavBar";
+import AppActionBar from "../containers/AppActionBar";
 import {ModalLogout} from "../containers/ModalLogout";
 import DoLogout from "../../modules/ajaxCalls/DoLogout";
-import AppActionBar from "../containers/AppActionBar";
-import useComponent from "./useComponent";
+import type TypeResult from "../../modules/interfaces/TypeResult";
 import type {CbComponentJax, HandleComponentJax} from "../../modules/interfaces/TypeJax";
 
 const cbLogoutYes = (cbAfterOut : ()=>void, setResult : (result : TypeResult)=>void) => {
@@ -23,6 +23,8 @@ const cbLogoutYes = (cbAfterOut : ()=>void, setResult : (result : TypeResult)=>v
 };
 
 const AppUi = ({user, cbAfterOut}) => {
+	console.count("APP UI RENDERED");
+	
 	// Initialize Initial Component
 	const initComponent : CbComponentJax = {name : user ? "home" : "blank"};
 	
@@ -30,41 +32,19 @@ const AppUi = ({user, cbAfterOut}) => {
 	const [component : CbComponentJax, setComponent] = useState(initComponent);
 	
 	// Function To Render/Switch Between Components
-	const componentJaxHandler : HandleComponentJax = (name, jax) => {
+	const handleComponentJax : HandleComponentJax = (name, jax) => {
 		switch(name){
 			case "logout":
 				document.getElementById("modalLogout").style.display = "block";
 				break;
 			default:
-				setComponent({name, jax, cbHandler : componentJaxHandler});
+				setComponent({name, jax, cbHandler : handleComponentJax});
 		}
-		
-		/* switch(name){
-		 case "profiler":
-		 setProfiler(data);
-		 setMainComp("profile");
-		 break;
-		 case "profile":
-		 setProfiler(user);
-		 setMainComp("profile");
-		 break;
-		 case "project":
-		 setProjector(data);
-		 setMainComp("project");
-		 break;
-		 case "team":
-		 setTeamer(data);
-		 setMainComp("team");
-		 break;
-		 default:
-		 setComponent({name : "error", data : `Component for ${name} not found`});
-		 
-		 } */
 	};
 	
 	return <>
 		{/* App Navigation Bar */}
-		<AppNavBar cbHandler={componentJaxHandler} user={user}/>
+		<AppNavBar cbHandler={handleComponentJax} user={user}/>
 		
 		{/* Modal Box/Component For Logout  */}
 		<ModalLogout cbYes={(setResult) => cbLogoutYes(cbAfterOut, setResult)}/>
@@ -80,7 +60,7 @@ const AppUi = ({user, cbAfterOut}) => {
 				</div>
 				{/* Action Bar */}
 				<div className={"la-s100 la-l60"}>
-					<AppActionBar cbComponent={componentJaxHandler} isSuper={user.super}/>
+					<AppActionBar cbComponent={handleComponentJax} isSuper={user.super}/>
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,14 @@ const showData = (tabId : string, data : TypeProject[] | TypeTeamProject[], cbHa
 		c._capitalWords();
 		(h === "name" || h === "project")
 		&& c._classes("w3-text-blue la-underline-hover la-bold")
-		&& c._click(() => cbHandler("profile", {of : h === "project" ? "project" : dataType, by : h === "project" ? i.projectid : i._id}));
+		&& c._click(() => {
+			cbHandler("profile",
+			          {
+				          of : h === "project" ? "project" : dataType,
+				          by : h === "project" ? i.projectid : i._id
+			          }
+			);
+		});
 	};
 	
 	tab._showData(data, null, type.includes, onShow, null, dataType !== "people", {createdAt : {input : "date"}}, false, true)
@@ -79,6 +86,8 @@ const ProfilePeople = (props : { profile : TypeProfilePeople, cbHandler : Handle
 	const cbHandler = props.cbHandler;
 	const projects  = profile.projects;
 	const teams     = profile.teams.map(team => ({...team, project : team.project.name, projectid : team.project._id}));
+	
+	console.info(teams);
 	
 	const tabs = {
 		profile : {

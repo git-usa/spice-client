@@ -224,7 +224,7 @@ export const lat_mongoDate = (dateValue, toUtc = true) => {
 		second : date.toLocaleString("en-us", {second : "numeric"}),
 		merid  : date.toLocaleString("en-us", {hour : "numeric"}).split(" ")[1].trim(),
 		//
-		// HOUR : date.toLocaleString("en-us", {hour12 : false}).split(",")[1].split(":")[0].trim(),
+		HOUR : date.toLocaleString("en-us", {hour12 : false}).split(",")[1].split(":")[0].trim(),
 		//
 		timeZone : date.toLocaleString("en-us", {timeZoneName : "short"})
 	};

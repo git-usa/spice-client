@@ -3,6 +3,7 @@ import {forwardRef} from "react";
 interface TypeInput{
 	id? : string;
 	type? : string;
+	value? : any;
 	classes? : string;
 	placeholder? : string;
 	required? : boolean;
@@ -35,17 +36,21 @@ export const InpPassword   = (props : TypeInput) => CliInput({...props, placehol
 export const InpRePassword = (props : TypeInput) => CliInput({...props, placeholder : "Retype Password", type : "password"});
 export const InpMessage    = (props : TypeInput) => CliText({...props, placeholder : "Enter Message"});
 
-export const RefSubject = forwardRef((props : TypeInput, ref) => <input ref={ref}
-                                                                        id={props.id}
-                                                                        name={props.id}
-                                                                        onKeyDown={props.onEnter}
-                                                                        required={props.required}
-                                                                        placeholder={props.placeholder || "Subject"}
-                                                                        className={`w3-input la-input ${props.classes}`}/>);
+export const RefSubject = forwardRef((props : TypeInput, ref) => {
+	return <input ref={ref}
+	              id={props.id}
+	              defaultValue={props.value || ""}
+	              name={props.id}
+	              onKeyDown={props.onEnter}
+	              required={props.required}
+	              placeholder={props.placeholder || "Subject"}
+	              className={`w3-input la-input ${props.classes}`}/>;
+});
 export const RefMessage = forwardRef((props : TypeInput, ref) => <textarea ref={ref}
                                                                            id={props.id}
                                                                            name={props.id}
                                                                            onKeyDown={props.onEnter}
                                                                            required={props.required}
+                                                                           defaultValue={props.value}
                                                                            placeholder={props.placeholder || "Message"}
                                                                            className={`w3-input la-input ${props.classes}`}></textarea>);

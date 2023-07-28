@@ -20,7 +20,7 @@ export interface CbJax extends TypeJax{
 	cbHandler : HandleJax;
 }
 
-export interface CbJaxHandleComponent extends TypeJax{
+export interface CbJaxHandleComponentJax extends TypeJax{
 	cbHandler : HandleComponentJax;
 }
 
