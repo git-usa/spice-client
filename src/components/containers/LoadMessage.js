@@ -6,7 +6,6 @@ import type {HandlerResult} from "../../modules/interfaces/TypeResult";
 import type {TypeMessageExt} from "../../modules/interfaces/TypeMessage";
 import JaxCompose from "../../modules/ajaxCalls/JaxCompose";
 import WrapError from "../parents/WrapError";
-import ResultBar from "../singles/ResultBar";
 
 const LoadMessage = (props : { message : TypeMessageExt }) => {
 	// console.count("LOAD MESSAGE RENDERED");
@@ -59,11 +58,11 @@ const LoadMessage = (props : { message : TypeMessageExt }) => {
 	}
 	
 	if(message.path === "message"){
-		const createdAt = lat_mongoDate(message.receiver.createdAt, false);
+		// const createdAt = lat_mongoDate(message.receiver.createdAt, false);
 		message.replied = `\nThis message is a reply to following message:\n`
 		                  + `\nSubject: ${message.receiver.subject}`
-		                  + `\n\n${message.receiver.message}`
-		                  + `\n\n${createdAt.dayMonthFormat + ", " + createdAt.time}`;
+		                  + `\n\n${message.receiver.message}`;
+		// + `\n\n${createdAt.dayMonthFormat + ", " + createdAt.time}`;
 	}
 	
 	const comp = <div>
@@ -83,8 +82,7 @@ const LoadMessage = (props : { message : TypeMessageExt }) => {
 	// SHOW MESSAGE COMPONENT
 	return <>
 		<ModalCompose cbYes={compose} subject={`Ref: ${message.subject}`}/>
-		<WrapError component={comp}
-		           fallback={<ResultBar text={"Error in Load Message Box. Check Console"} type={"error"}/>}/>;
+		<WrapError fallback="Error in Load Message Box." component={comp}/>
 	</>;
 };
 

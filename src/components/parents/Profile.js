@@ -1,23 +1,18 @@
-import {useEffect, useRef, useState} from "react";
-import ResultBar from "../singles/ResultBar";
-import JaxProfile from "../../modules/ajaxCalls/JaxProfile";
-import type {CbJaxHandleComponentJax, TypeJax} from "../../modules/interfaces/TypeJax";
-import type TypeResult, {HandlerResult} from "../../modules/interfaces/TypeResult";
-import ProfilePeople from "../chidlren/People/ProfilePeople";
-import ProfileProject from "../chidlren/Projects/ProfileProject";
-import {lat_isValidObject} from "../../modules/scripts/labject";
-import {_ladEleById} from "../../modules/scripts/_lady";
 import Blank from "./Blank";
-import ProfileTeam from "../chidlren/Teams/ProfileTeam";
-import BlankComponent from "../singles/BlankComponent";
-import {ModalCompose} from "../containers/ModalCompose";
-import JaxCompose from "../../modules/ajaxCalls/JaxCompose";
 import WrapError from "./WrapError";
-
-interface Type{
-	data : any;
-	type : string;
-}
+import ResultBar from "../singles/ResultBar";
+import {useEffect, useRef, useState} from "react";
+import BlankComponent from "../singles/BlankComponent";
+import {_ladEleById} from "../../modules/scripts/_lady";
+import {ModalCompose} from "../containers/ModalCompose";
+import ProfileTeam from "../chidlren/Teams/ProfileTeam";
+import JaxCompose from "../../modules/ajaxCalls/JaxCompose";
+import JaxProfile from "../../modules/ajaxCalls/JaxProfile";
+import ProfilePeople from "../chidlren/People/ProfilePeople";
+import {lat_isValidObject} from "../../modules/scripts/labject";
+import ProfileProject from "../chidlren/Projects/ProfileProject";
+import type TypeResult, {HandlerResult} from "../../modules/interfaces/TypeResult";
+import type {CbJaxHandleComponentJax, TypeJax} from "../../modules/interfaces/TypeJax";
 
 const Profile = (jax : CbJaxHandleComponentJax) => {
 	console.count("PROFILE RENDERED");
@@ -122,9 +117,7 @@ const Profile = (jax : CbJaxHandleComponentJax) => {
 			</div>
 		</div>
 		<div>
-			<WrapError fallback={<ResultBar text={"Some Error Occurred. Check Console."} type={"error"}/>}>
-				{component}
-			</WrapError>
+			<WrapError fallback="Some Error Occurred" component={component}/>
 		</div>
 	</>;
 };

@@ -1,7 +1,6 @@
 import Blank from "../../parents/Blank";
 import {useEffect, useState} from "react";
 import WrapError from "../../parents/WrapError";
-import ResultBar from "../../singles/ResultBar";
 import LoadMessage from "../../containers/LoadMessage";
 import LoadMessageList from "../../containers/LoadMessageList";
 import {lat_mapToArray} from "../../../modules/scripts/labject";
@@ -20,13 +19,13 @@ const ToggleList = (id) => {
 };
 
 const WrapLoadMessage = (props : { message : TypeMessageExt }) => {
-	return <WrapError fallback={<ResultBar text={"Some Error in Load Message"} type={"error"}/>}
+	return <WrapError fallback="Some Error in Load Message."
 	                  component={<LoadMessage message={props.message}/>}/>;
 };
 
 const WrapMessageList = (props : { messages : TypeMessageExt[], cbLoadMessage : (message : TypeMessageExt)=>void, isSent : boolean }) => {
 	const msg = `Some error in List ${props.isSent ? "Sent" : "Received"} Messages. Check Console`;
-	return <WrapError fallback={<ResultBar text={msg} type={"error"}/>}
+	return <WrapError fallback={msg}
 	                  component={<LoadMessageList messages={props.messages} cbLoadMessage={props.cbLoadMessage} isSent={props.isSent}/>}/>;
 };
 
@@ -43,10 +42,6 @@ const ListMessages = (props : { messages : TypeMessageList }) => {
 	useEffect(() => {
 		ToggleList("receivedList");
 	}, [messages]);
-	
-	if(messages){
-		throw Error("ERROR CHECK : List Messages");
-	}
 	
 	/**
 	 * Show Message Block
@@ -73,7 +68,7 @@ const ListMessages = (props : { messages : TypeMessageList }) => {
 					<WrapMessageList cbLoadMessage={cbLoadMessage} messages={received} isSent={false}/>
 				</div>
 			</div>
-			<div className={"la-l7"}>{mainComp}</div>
+			<div className={"la-l7 w3-padding-ver-24"}>{mainComp}</div>
 		</div>
 	</>;
 };

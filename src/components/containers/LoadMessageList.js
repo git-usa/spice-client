@@ -8,7 +8,7 @@ const LoadMessageList = (props : { messages : TypeMessageExt[], cbLoadMessage : 
 	const messages      = props.messages;
 	const cbLoadMessage = props.cbLoadMessage;
 	
-	console.info(messages);
+	// console.info(messages);
 	
 	return (lat_isValidArray(messages) && messages.map((message : TypeMessageExt) => {
 		const status   = message.status;

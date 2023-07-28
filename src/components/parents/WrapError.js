@@ -1,4 +1,5 @@
 import {Component} from "react";
+import ResultBar from "../singles/ResultBar";
 
 class ErrorBoundary extends Component{
 	constructor(props){
@@ -8,9 +9,9 @@ class ErrorBoundary extends Component{
 	
 	static getDerivedStateFromError(error){
 		// Update state so the next render will show the fallback UI.
-		console.info("ERROR CAUGHT");
-		console.error(error);
-		return {hasError : true};
+		// console.info("ERROR CAUGHT");
+		// console.error(error);
+		return {hasError : error};
 	}
 	
 	componentDidCatch(error : Error, errorInfo : React.ErrorInfo){
@@ -22,7 +23,10 @@ class ErrorBoundary extends Component{
 	render(){
 		if(this.state.hasError){
 			// You can render any custom fallback UI
-			return this.props.fallback;
+			const error : Error = this.state.hasError;
+			console.info("ERROR CAUGHT");
+			const msg = `${this.props.fallback}. ${error.name} -> ${error.message}. Check Console for more info`;
+			return <ResultBar text={msg} type={"error"}/>;
 		}
 		return this.props.children;
 	}
