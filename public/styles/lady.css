@@ -418,3 +418,13 @@
 .la-validate:has(~input:not(:valid)){
 	color:#f44336;
 }
+
+.la-pre{
+	overflow:auto;
+	line-height:25px;
+	word-wrap:break-word;
+	white-space:pre-wrap;
+	white-space:-o-pre-wrap;
+	white-space:-moz-pre-wrap;
+	font:normal 18px "Segoe UI", Arial, sans-serif;
+}

@@ -23,8 +23,7 @@ export const lat_toKeys = (obj) => Object.keys(obj);
  * Get Array of Values from Object
  * @returns {any[]}
  */
-
-export const lat_toValues = (obj) => Object.values(obj);
+export const lat_toValues = (obj : any) => Object.values(obj);
 
 /**
  * Check if Array is Valid & Have at least Minimum Length
@@ -109,7 +108,7 @@ export const lat_eachItem = (obj, next) => lat_eachProperty(obj, next);
  * @param next      Returning Function where each item will be sent processed
  * @returns {[]}
  */
-export const lat_mapToArray = (obj, next) => {
+export const lat_mapToArray = (obj : any, next : (key : string, obj : any) => void) => {
 	if(!(next && typeof next === "function")){
 		console.error("In _mapToArray, next should be a function, but is empty or other type");
 		return;
@@ -173,30 +172,6 @@ export const lat_sortBy = (obj, field) => {
 
 export const lat_renameKey = (obj, oldKey, newKey) => {delete (Object.assign(obj, {[newKey] : obj[oldKey]}))[oldKey];};
 
-export const lat_arrayToObject = function(arr, addInStart, addInEnd){
-	const obj = {};
-	
-	if(addInStart){
-		if(lat_isValidArray(addInStart)){
-			addInStart.forEach(v => obj[v] = v);
-		} else if(lat_isValidObject(addInStart)){
-			lat_eachItem(addInStart, (k, v) => obj[k] = v);
-		} else obj[addInStart] = addInStart;
-	}
-	
-	arr.forEach(v => obj[v] = v);
-	
-	if(addInEnd){
-		if(lat_isValidArray(addInStart)){
-			addInEnd.forEach(v => obj[v] = v);
-		} else if(lat_isValidObject(addInStart)){
-			obj.push(...addInEnd);
-		} else obj[addInEnd] = addInEnd;
-	}
-	
-	return obj;
-};
-
 export const lat_reverseArray = (arr) => {
 	let length = arr.length;
 	if(!arr || !length) return null;
@@ -207,7 +182,9 @@ export const lat_reverseArray = (arr) => {
 	return newArr;
 };
 
-export const lat_mongoDate = (dateValue, toUtc = true) => {
+export const lat_capital      = (text : string) => text.charAt(0).toUpperCase() + text.slice(1);
+
+export const lat_mongoDate    = (dateValue, toUtc = true) => {
 	if(isNaN(Date.parse(dateValue))) return null;
 	const date       = new Date(!toUtc ? dateValue : dateValue.replace(/-/g, "\/").replace(/T.+/, ""));
 	const dateFormat = {
@@ -226,7 +203,14 @@ export const lat_mongoDate = (dateValue, toUtc = true) => {
 		//
 		HOUR : date.toLocaleString("en-us", {hour12 : false}).split(",")[1].split(":")[0].trim(),
 		//
-		timeZone : date.toLocaleString("en-us", {timeZoneName : "short"})
+		timeZone       : date.toLocaleString("en-us", {timeZoneName : "short"}),
+		htmlInput      : "",
+		monthFormat    : "",
+		yearFormat     : "",
+		dayFormat      : "",
+		dayMonthFormat : "",
+		time           : "",
+		time24         : ""
 	};
 	
 	dateFormat.htmlInput
@@ -250,5 +234,3 @@ export const lat_mongoDate = (dateValue, toUtc = true) => {
 	
 	return dateFormat;
 };
-
-export const lat_capital = (text : string) => text.charAt(0).toUpperCase() + text.slice(1);

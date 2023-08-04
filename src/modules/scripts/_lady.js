@@ -278,7 +278,6 @@ export const _lady = {
 			node.innerHTML += html;
 			return node;
 		};
-		
 		return html === null || !html ? node : e();
 	},
 	
@@ -438,7 +437,7 @@ export const _lady = {
 	 **/
 	
 	// CONVERT TEXT TO JSON
-	_textToJson : function(text, checkKeys = [], node = this){
+	_textToJson : function(text, checkKeys = []){
 		try{
 			const result = JSON.parse(text);
 			if(checkKeys && Array.isArray(checkKeys) && checkKeys.length > 0){
@@ -476,7 +475,14 @@ export const _lady = {
 			//
 			HOUR : date.toLocaleString("en-us", {hour12 : false}).split(",")[1].split(":")[0].trim(),
 			//
-			timeZone : date.toLocaleString("en-us", {timeZoneName : "short"})
+			timeZone       : date.toLocaleString("en-us", {timeZoneName : "short"}),
+			htmlInput      : "",
+			dayFormat      : "",
+			yearFormat     : "",
+			monthFormat    : "",
+			dayMonthFormat : "",
+			time           : "",
+			time24         : ""
 		};
 		
 		dateFormat.htmlInput
@@ -492,6 +498,8 @@ export const _lady = {
 		dateFormat.dayMonthFormat = (dateFormat.day < 10 ? "0" + dateFormat.day : dateFormat.day)
 		                            + "-" + (dateFormat.monthName)
 		                            + "-" + dateFormat.year;
+		
+		dateFormat.monthFormat = dateFormat.monthName + " " + (dateFormat.day < 10 ? "0" + dateFormat.day : dateFormat.day) + ", " + dateFormat.year;
 		
 		dateFormat.time   = dateFormat.hour + ":" + dateFormat.minute + ":" + dateFormat.second + " " + dateFormat.merid;
 		dateFormat.time24 = dateFormat.HOUR + ":" + dateFormat.minute + ":" + dateFormat.second;
@@ -700,7 +708,7 @@ export const _lady = {
 			const hint  = field.hint;
 			const value = field.value;
 			
-			let tag = null;
+			let tag : null;
 			
 			switch(type){
 				case "button":
@@ -739,7 +747,7 @@ export const _lady = {
 				input.focus();
 				return (`Missing input ${name}`);
 			} else if(!all && (!value || value.length === 0)) continue;
-			getArray ? values.push(value) : values[name] = value;
+			Array.isArray(values) ? values.push(value) : values[name] = value;
 		}
 		
 		return values;
@@ -758,7 +766,7 @@ export const _lady = {
 	
 	_showRecord : function(record, id = null, node = this){
 		const table = this._tag("table", null, id, true, node);
-		const keys  = Object.keys(record);
+		// const keys  = Object.keys(record);
 		for(const key in record){
 			if(!record.hasOwnProperty(key)) continue;
 			const row = table._tag("tr");
@@ -773,59 +781,6 @@ export const _lady = {
 	 * AJAX HTTP HANDLERS
 	 *-------------------------------------------------------------------------
 	 */
-	
-	_ajax : function(next, params = {}, url = "", method = "post", carry = null, node = this){
-		
-		// Convert/Stringify Value if Type is Object/Array
-		for(let key in params){
-			if(!params.hasOwnProperty(key)) continue;
-			const value = params[key];
-			params[key] = (typeof value === "object" || Array.isArray(value))
-			              ? JSON.stringify(value)
-			              : value;
-		}
-		
-		// Encode Keys & Data as URI String
-		const encodedParams = Object.keys(params)
-		                            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-		                            .join("&");
-		
-		// Create & Initialize New HTTP Request
-		const httpRequest = new XMLHttpRequest();
-		httpRequest.open(method, url, true);
-		httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		
-		// If Next is Available, Call Next When Request is finished & Response is ready
-		httpRequest.onreadystatechange = next ? () => {
-			/**
-			 * readyState values
-			 * 0: request not initialized
-			 * 1: server connection established
-			 * 2: request received
-			 * 3: processing request
-			 * 4: request finished and response is ready
-			 */
-			
-			// console.info('Processing Next');
-			// console.info('Ready State: ' + httpRequest.readyState);
-			// console.info('Status: ' + httpRequest.status);
-			
-			if(httpRequest.readyState === 4) next(httpRequest.response, httpRequest.status, carry);
-		} : undefined;
-		
-		// Send HTTP Request with Encoded Params
-		httpRequest.send(encodedParams);
-		
-		return node;
-	},
-	
-	_get : function(next, params = {}, url = "", carry, node = this){
-		this._ajax(next, params, url, "get", carry, node);
-	},
-	
-	_post : function(next, params = {}, url = "", carry, node = this){
-		this._ajax(next, params, url, "post", carry, node);
-	},
 	
 	/**
 	 *--------------------------------------------------------------------
@@ -843,9 +798,9 @@ export const _lady = {
  const [_, _l] : _lady = (id, tagName, content, node) =>
  id && !tagName ? _lady._getNode(id) : _lady._tag(tagName, content, id, true, node);*/
 
-export const _l = (id, tagName = null, content = null, node = null) =>
+export const _l = (id : string, tagName = null, content = null, node = null) =>
 	id && !tagName ? _lady._getNode(id) : _lady._tag(tagName, content, id, true, node);
 
-export const _ladEleById = (id) => document.getElementById(id);
+export const _ladEleById = (id : string) => document.getElementById(id);
 
 export default _l;
