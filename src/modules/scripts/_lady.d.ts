@@ -86,8 +86,8 @@ export const _lady : {
 	_goTo(url : string, newTab : boolean, cursor : boolean, node? : HTMLElement | null) : HTMLElement | null
 	_showForm(schema : any, inputClass : string | null, id : string | null, next : Function | undefined, submitId : string | null, method : string,
 	          node? : HTMLElement | null) : HTMLElement | null
-	_getInputs(selector : string, all ? : boolean, mustRequired ? : boolean, getArray ? : boolean, trim ? : boolean,
-	           node? : HTMLElement | null) : string | {[key : string] : string} | string[] | null
+	_getInputs<T>(selector : string, all ? : boolean, mustRequired ? : boolean, getArray ? : boolean, trim ? : boolean,
+	              node? : HTMLElement | null) : T | {[key : string] : string} | string[] | string | null
 	_clearInputs(selector : string, node? : HTMLElement | null) : NodeListOf<Element> | null
 	_showRecord(record : any, id : string | null, node? : HTMLElement | null) : HTMLElement | null
 	_next(next : Function | undefined, node? : HTMLElement | null) : HTMLElement | null

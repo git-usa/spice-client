@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState, createContext} from "react";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
 import {TypeProfileMin} from "../../modules/interfaces/TypeAll";
+import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
 
 interface TypeContext{
-	user : TypeProfileMin | undefined;
+	user : TypePeopleSession | undefined;
 	cbHandler : HandleComponentJax | undefined;
 }
 
@@ -81,7 +82,7 @@ const BarItems = () => {
  * @constructor
  * @param props
  */
-const AppNavBar = (props : {user : TypeProfileMin, cbHandler : HandleComponentJax}) => {
+const AppNavBar = (props : {user : TypePeopleSession, cbHandler : HandleComponentJax}) => {
 	useEffect(() => {
 		window.onscroll = () => {
 			const rest = document.getElementById("headBarBack");

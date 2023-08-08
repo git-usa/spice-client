@@ -2,25 +2,16 @@ import React from "react";
 import {useEffect, useState} from "react";
 
 const navLinks : any = {
-	home      : "home",
-	solutions : "#solutions",
-	contact   : "#contact",
-	demo      : "demo",
-	login     : "#login"
+	home : "home"
 };
 
-const showLinks = (classes : string, cbLinkHandler : (link : string) => void) =>
-	Object.keys(navLinks)
-	      .map(v => <a href={navLinks[v]}
-	                   className={classes}
-	                   key={`loginNavBarLink${v}`}
-	                   onClick={() => cbLinkHandler(v)}>{v}</a>);
+const showLinks = (classes : string) => Object.keys(navLinks).map(v => <a href={navLinks[v]} className={classes} key={`loginNavBarLink${v}`}>{v}</a>);
 
-const MobileNavMenu = (props : {leftPos : string, cbLinkHandler : (link : string) => void}) =>
+const MobileNavMenu = (props : {leftPos : string}) =>
 	<>
 		<div className={"mobile-nav-menu la-container w3-hide-large"} style={{left : props.leftPos}}>
 			<div className={"la-s65 w3-black nav-links w3-large"}>
-				{showLinks("mobile-nav-link", props.cbLinkHandler)}
+				{showLinks("mobile-nav-link")}
 			</div>
 			
 			{/* MAKE REMAINING BLANK SPACE/SCREEN TRANSPARENT/OPAQUE  */}
@@ -28,7 +19,7 @@ const MobileNavMenu = (props : {leftPos : string, cbLinkHandler : (link : string
 		</div>
 	</>;
 
-const ShowMobileNav = (props : {cbLinkHandler : (link : string) => void}) => {
+const ShowMobileNav = () => {
 	const [showNav, setShowNav] = useState(false);
 	
 	const show = (toggleId : string) => {
@@ -39,7 +30,7 @@ const ShowMobileNav = (props : {cbLinkHandler : (link : string) => void}) => {
 	};
 	
 	return <>
-		<MobileNavMenu leftPos={showNav ? "0" : "-100%"} cbLinkHandler={props.cbLinkHandler}/>
+		<MobileNavMenu leftPos={showNav ? "0" : "-100%"}/>
 		<div id={"menuX"} onClick={() => show("menuX")} className={"mobile-nav-btn w3-hide-large"}>
 			<div className={"menu-bar1 w3-white"}></div>
 			<div className={"menu-bar2 w3-yellow"}></div>
@@ -49,23 +40,23 @@ const ShowMobileNav = (props : {cbLinkHandler : (link : string) => void}) => {
 	
 };
 
-const ShowDesktopNav = (props : {cbLinkHandler : (link : string) => void}) => {
+const ShowDesktopNav = () => {
 	return <div className={"la-s100 la-l50 w3-center w3-xlarge w3-hide-small"}>
-		{showLinks("nav-links", props.cbLinkHandler)}
+		{showLinks("nav-links")}
 	</div>;
 };
 
-const BarIcons = (props : {cbLinkHandler : (link : string) => void}) => {
+const BarIcons = () => {
 	return <>
 		<div className={"la-container flex-center-vertical headBar front w3-text-white"}>
 			<h1 className={"la-s100 la-l50 w3-center la-bold"}>Infotropy</h1>
-			<ShowDesktopNav cbLinkHandler={props.cbLinkHandler}/>
+			<ShowDesktopNav/>
 		</div>
-		{<ShowMobileNav cbLinkHandler={props.cbLinkHandler}/>}
+		{<ShowMobileNav/>}
 	</>;
 };
 
-const LoginNavBar = (props : {cbLinkHandler : (link : string) => void}) => {
+const LoginNavBar = () => {
 	useEffect(() => {
 		window.onscroll = () => {
 			const rest = document.getElementById("headBarBack");
@@ -77,7 +68,7 @@ const LoginNavBar = (props : {cbLinkHandler : (link : string) => void}) => {
 	return <>
 		<div className={"headBar"}>
 			<div id={"headBarBack"} className={"headBar w3-black back"}></div>
-			<BarIcons cbLinkHandler={props.cbLinkHandler}/>
+			<BarIcons/>
 		</div>
 	</>;
 };

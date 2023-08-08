@@ -1,9 +1,9 @@
 import {AjaxPostCall} from "./AjaxCalls";
 import type {HandleResultData} from "../interfaces/TypeResult";
 
-const CheckSession = (cbResult : HandleResultData) => {
+const JaxSession = (cbResult : HandleResultData) => {
 	console.info("CONTACTING SERVER FOR VERIFYING LOGIN SESSION");
-	AjaxPostCall("http://localhost:8080/people", "logged", null, cbResult);
+	AjaxPostCall("http://localhost:8080/login", "session", null, cbResult);
 };
 
-export default CheckSession;
+export default JaxSession;

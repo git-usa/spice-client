@@ -3,12 +3,10 @@ import {useEffect} from "react";
 import {_ladEleById} from "../../modules/scripts/_lady";
 
 const LoadPage = (props : {message : string, addClass? : string}) => {
-	console.count("LOAD PAGE RENDER");
 	const message = props.message;
 	useEffect(() => {
 		          const root : HTMLElement = _ladEleById("root");
-		          if(root)
-			          root.style.height = "100%";
+		          if(root) root.style.height = "100%";
 	          },
 	          [message]
 	);

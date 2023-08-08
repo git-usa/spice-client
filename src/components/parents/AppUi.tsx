@@ -10,6 +10,7 @@ import type TypeResult from "../../modules/interfaces/TypeResult";
 import type {TypeProfileMin} from "../../modules/interfaces/TypeAll";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
 import {_ladEleById} from "../../modules/scripts/_lady";
+import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
 
 const cbLogoutYes = (cbAfterOut : () => void, setResult : (result : TypeResult) => void) => {
 	const btnYes : HTMLButtonElement    = _ladEleById("btnLogoutYes");
@@ -32,7 +33,7 @@ const cbLogoutYes = (cbAfterOut : () => void, setResult : (result : TypeResult) 
 };
 
 interface Type{
-	user : TypeProfileMin;
+	user : TypePeopleSession;
 	cbAfterOut : () => void;
 }
 

@@ -3,6 +3,12 @@ export interface TypePeopleLogin{
 	password : string;
 }
 
+export interface TypePeopleSession{
+	id : string;
+	name : String;
+	super : boolean;
+}
+
 export interface TypePeopleInfo{
 	id : string;
 	name : string;
