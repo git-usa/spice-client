@@ -64,7 +64,7 @@ const ListTeams = (props : Type) => {
 			
 			switch(h){
 				case "name":
-					c._click(() => cbComponentJax("profile", {of : "team", by : i._id}));
+					c._click(() => cbComponentJax("profile", {of : "team", by : i.id}));
 					break;
 				case "creator":
 					c._click(() => cbComponentJax("profile", {of : "people", by : i.creatorId}));

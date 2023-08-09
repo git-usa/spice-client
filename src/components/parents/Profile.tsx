@@ -21,8 +21,8 @@ const resultBarId = "setProfileResult";
 const showResult = ({text, type} : TypeResult) => showResultBar(resultBarId, {text, type});
 
 const Profile = (jax : CbJaxHandleComponentJax) => {
-	console.clear();
-	console.info(jax);
+	// console.clear();
+	// console.info(jax);
 	const of           = jax.of;
 	const btnReloadId  = "btnReload";
 	const btnComposeId = "btnCompose";
@@ -43,6 +43,7 @@ const Profile = (jax : CbJaxHandleComponentJax) => {
 		
 		showResult({text : "Getting Profile...", type : "info"});
 		
+		console.info("JAX : ", jax);
 		JaxProfile({by : jax.by, of : jax.of}, (result, data) => {
 			showResult(result);
 			if(result.type === "info") return;
@@ -54,7 +55,7 @@ const Profile = (jax : CbJaxHandleComponentJax) => {
 			}
 			
 			showResult({text : "Profile Found", type : "pass"});
-			
+			console.info("Profile of ", of);
 			switch(of){
 				case "people":
 					setComponent(<WrapComp msg={"Error in Profile People"}

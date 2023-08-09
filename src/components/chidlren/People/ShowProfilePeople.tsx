@@ -22,7 +22,7 @@ const ShowProfilePeople = (props : {tabId : string, profile : TypeProfilePeople}
 	
 	lady(tabId)
 		._replace(null)
-		._showObject(profile, null, "name role status projects teams super creator createdAt", onShow, null, schema, false, true)
+		._showObject(profile, null, "name role status projects teams super createdAt", onShow, null, schema, false, true)
 		._classes("w3-table w3-table-all");
 };
 

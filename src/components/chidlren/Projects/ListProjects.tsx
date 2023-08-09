@@ -8,16 +8,16 @@ import type {TypeListProject} from "../../../modules/interfaces/TypeList";
 
 interface Type{
 	projects : TypeListProject[];
-	cbResult : HandleResultData;
+	// cbResult : HandleResultData;
 	cbComponent : HandleComponentJax;
 }
 
 const ListProjects = (props : Type) => {
 	
-	console.info("SHOW PROJECT LIST RENDERED");
+	console.info("LIST PROJECTS RENDERED");
 	
 	const projects : TypeListProject[]     = props.projects;
-	const cbResult : HandleResultData      = props.cbResult;
+	// const cbResult : HandleResultData      = props.cbResult;
 	const cbComponent : HandleComponentJax = props.cbComponent;
 	
 	useEffect(() => {
@@ -25,7 +25,7 @@ const ListProjects = (props : Type) => {
 		
 		if(!projects || projects.length === 0){
 			console.error("NO PROJECT DATA RECEIVED. CHANGING RESULT");
-			cbResult({text : "No Project Received", type : "error"});
+			// cbResult({text : "No Project Received", type : "error"});
 			return;
 		}
 		
@@ -56,7 +56,7 @@ const ListProjects = (props : Type) => {
 			
 			switch(h){
 				case "name":
-					c._click(() => cbComponent("profile", {of : "project", by : i._id}));
+					c._click(() => cbComponent("profile", {of : "project", by : i.id}));
 					break;
 				case"creator":
 					c._click(() => cbComponent("profile", {of : "people", by : i.creatorId}));

@@ -11,7 +11,6 @@ import type {TypeProfilePeople} from "../../../modules/interfaces/TypeProfile";
 import {lat_cloneObject, lat_isValidArray, lat_mapToArray} from "../../../modules/scripts/labject.js";
 import ShowProfilePeople from "./ShowProfilePeople";
 import {TypeLog} from "../../../modules/interfaces/TypeLog";
-import {TypeProfileMin} from "../../../modules/interfaces/TypeAll";
 
 const resultBarId = "setProfilePeopleResult";
 
@@ -42,7 +41,7 @@ const showData = (tabId : string, data : TypeLog[] | TypeProject[] | TypeTeam[],
 				};
 			case "people":
 				return {
-					includes : "name role status totalProjects totalTeams super creator createdAt"
+					includes : "name role status totalProjects totalTeams super createdAt"
 				};
 			case "log":
 				return {
@@ -78,12 +77,14 @@ const showData = (tabId : string, data : TypeLog[] | TypeProject[] | TypeTeam[],
 const ProfilePeople = (props : {profile : TypeProfilePeople, cbHandler : HandleComponentJax}) => {
 	const profile = props.profile;
 	
+	console.info(profile);
+	
 	useEffect(() => {
 		if(!profile) return;
-		ShowProfilePeople({tabId : tabs.profile.id, profile : lat_cloneObject(profile)});
-		showData(tabs.log.id, logs, cbHandler, "log");
-		showData(tabs.team.id, teams, cbHandler, "team");
-		showData(tabs.project.id, projects, cbHandler, "project");
+		// ShowProfilePeople({tabId : tabs.profile.id, profile : lat_cloneObject(profile)});
+		// showData(tabs.log.id, logs, cbHandler, "log");
+		// showData(tabs.team.id, teams, cbHandler, "team");
+		// showData(tabs.project.id, projects, cbHandler, "project");
 	}, [profile]);
 	
 	if(!profile) return <ResultBar text={"No Profile Found to Show"} type={"error"}/>;
@@ -119,12 +120,12 @@ const ProfilePeople = (props : {profile : TypeProfilePeople, cbHandler : HandleC
 	return <>
 		<div id={resultBarId}></div>
 		{
-			lat_mapToArray(tabs, (k, o) => {
+			/*lat_mapToArray(tabs, (k, o) => {
 				return <div key={`profilePeople_${k}`} className={"w3-padding-hor-24 la-container"}>
 					<h4 className={`la-capital la-bold w3-padding la-l la-s ${o.classes}`}>{o.text}</h4>
 					<div className={"w3-responsive la-l la-s"} id={o.id}></div>
 				</div>;
-			})
+			})*/
 		}
 	</>;
 };

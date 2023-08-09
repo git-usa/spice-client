@@ -1,5 +1,5 @@
 export interface TypeList{
-	_id : string,
+	id : string,
 	name : string,
 	status : string,
 	createdAt : Date,

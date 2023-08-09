@@ -27,5 +27,4 @@ export interface TypePeopleCreate extends TypePeopleLogin{
 export interface TypePeople extends TypePeopleCreate{
 	id : string;
 	createdAt : Date;
-	updatedAt : Date;
 }

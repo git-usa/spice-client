@@ -60,13 +60,13 @@ const List = (jax : CbJaxHandleComponentJax) => {
 				case "people":
 					setComponent(
 						<WrapComp msg={"List People"}
-						          component={<ListPeople cbResult={showResult} cbComponent={jax.cbHandler} people={data}/>}/>
+						          component={<ListPeople cbComponent={jax.cbHandler} people={data}/>}/>
 					);
 					break;
 				case "project":
 					setComponent(
 						<WrapComp msg={"List Project"}
-						          component={<ListProjects cbResult={showResult} projects={data} cbComponent={jax.cbHandler}/>}/>
+						          component={<ListProjects cbComponent={jax.cbHandler} projects={data}/>}/>
 					);
 					break;
 				case"team":
