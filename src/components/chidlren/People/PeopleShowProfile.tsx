@@ -2,7 +2,7 @@ import lady, {_lady} from "../../../modules/scripts/_lady.js";
 import type {TypeProfilePeople} from "../../../modules/interfaces/TypeProfile";
 import {lat_cloneObject} from "../../../modules/scripts/labject";
 
-const ShowProfilePeople = (props : {tabId : string, profile : TypeProfilePeople}) => {
+const PeopleShowProfile = (props : {tabId : string, profile : TypeProfilePeople}) => {
 	
 	const tabId : string = props.tabId;
 	const profile : any  = lat_cloneObject(props.profile);
@@ -26,4 +26,4 @@ const ShowProfilePeople = (props : {tabId : string, profile : TypeProfilePeople}
 		._classes("w3-table w3-table-all");
 };
 
-export default ShowProfilePeople;
+export default PeopleShowProfile;

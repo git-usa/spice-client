@@ -7,9 +7,9 @@ import type TypeResult from "../../modules/interfaces/TypeResult";
 import {TypePeopleLogin, TypePeopleSession} from "../../modules/interfaces/TypePeople";
 
 const modalId     = "modalLogin";
-const resultBarId = "setLoginResult";
 const btnYesId    = "btnLoginYes";
 const btnCancelId = "btnLoginCancel";
+const resultBarId = "setLoginResult";
 
 export const ModalLogin = (props : {cbAfterLogin : (user : TypePeopleSession) => void}) => {
 	
@@ -56,8 +56,7 @@ export const ModalLogin = (props : {cbAfterLogin : (user : TypePeopleSession) =>
 
 export const showModalLogin = () => {
 	const modal : HTMLElement = _ladEleById(modalId);
-	if(modal)
-		modal.style.display = "block";
+	modal && (modal.style.display = "block");
 };
 
 const closeModalLogin = () => {

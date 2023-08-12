@@ -8,28 +8,29 @@ export interface TypeProfile{
 	name : string;
 	status : string;
 	createdAt : Date;
-	creator : TypeProfileMin;
-	creatorId? : string;
+	creator? : TypeProfileMin;
 }
 
-export interface TypeProfilePeople extends TypeProfile{
+export interface TypeProfilePeople{
+	profile : TypeProfile & {role : string};
+	creator : TypeProfileMin;
 	logs : TypeLog[];
 	projects : TypeProject[];
 	teams : TypeTeamProject[];
 }
 
 export interface TypeProfileProject extends TypeProfile{
+	profile : TypeProfile & {brief : string};
+	creator : TypeProfileMin;
 	manager : TypeProfileMin;
-	managerId? : string;
-	
 	teams : TypeTeam[];
 }
 
 export interface TypeProfileTeam extends TypeProfile{
+	profile : TypeProfile & {brief : string};
+	creator : TypeProfileMin;
 	project : TypeProfileMin;
 	manager : TypeProfileMin;
-	projectId? : string;
-	managerId? : string;
 }
 
 export interface TypeProfileAny{

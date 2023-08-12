@@ -1,29 +1,31 @@
-import React, {useEffect} from "react";
-import _l, {_lady} from "../../../modules/scripts/_lady";
-import {TypeProject} from "../../../modules/interfaces/TypeProject";
+import ListRender from "./ListRender";
+import React from "react";
+import {_lady} from "../../../modules/scripts/_lady";
+import {TypeListBrief, TypeListProject} from "../../../modules/interfaces/TypeList";
 
-interface Type{
-	list : TypeProject[];
-	title : string;
-	id : string;
-}
-
-const ListProjectsBrief = (list : TypeProject[], title = "Projects Managing", id = "projectTab") => {
+const ListProjectsBrief = ({list, cbComponent, title = "Projects List", id = "projectTab"} : TypeListBrief) => {
 	
-	const onShow = (c : typeof _lady, h : string, v : any, i : TypeProject, carry : any) => {
+	const includes = "name category status manager teams createdAt brief";
 	
+	const onShow = (c : typeof _lady, h : string, v : any, i : TypeListProject, carry : any) => {
+		if(!carry) return;
+		if(h === "manager"){
+			c._replace(i.manager.name);
+		}
+		
+		switch(h){
+			case "name":
+			case "manager":
+				const jax = h === "name" ? {of : "project", by : i.id} : {of : "people", by : i.manager.id};
+				c._classes("w3-text-blue la-bold")
+				 ._click(() => cbComponent("profile", jax));
+		}
+		c._capitalWords();
 	};
-	
-	useEffect(() => {
-		const tab = _l(id);
-		
-		tab._showData(list, null, "name category status brief createdAt", onShow, null, true, {createdAt : {input : "date"}});
-		
-	}, [list, id, title]);
 	
 	return <div className={"w3-padding-hor-24 la-container"}>
 		<h4 className={`la-capital la-bold w3-padding la-l la-s w3-khaki`}>{title}</h4>
-		<div className={"w3-responsive la-l la-s"} id={id}></div>
+		<ListRender list={list} id={id} onShow={onShow} includes={includes} carry={true}/>
 	</div>;
 	
 };

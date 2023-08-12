@@ -3,9 +3,9 @@ import Blank from "./Blank";
 import Create from "./Create";
 import {WrapComp} from "./WrapError";
 import ResultBar from "../singles/ResultBar";
-import AppHome from "../chidlren/AppChildren/AppHome";
+import AppHome from "../chidlren/App/AppHome";
 import type {TypeJax} from "../../modules/interfaces/TypeJax";
-import AppSample from "../chidlren/AppChildren/AppSample";
+import AppSample from "../chidlren/App/AppSample";
 import LoadPage from "./LoadPage";
 import AppLogin from "./AppLogin";
 

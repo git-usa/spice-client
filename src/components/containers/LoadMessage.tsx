@@ -108,7 +108,7 @@ const LoadMessage = (props : {message : TypeMessageExt}) => {
 	
 	// SHOW MESSAGE COMPONENT
 	return <>
-		<WrapError component={<ModalCompose cbYes={compose} subject={`Ref: ${message.subject}`}/>} fallback={"Modal Compose :"}/>
+		<WrapError component={<ModalCompose/>} fallback={"Modal Compose :"}/>
 		<WrapError fallback="Error in Load Message Box." component={comp}/>
 	</>;
 };

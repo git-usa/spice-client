@@ -9,15 +9,11 @@ interface Type{
 	cbComponent : HandleComponentJax;
 }
 
-const ListPeople = (props : Type) => {
+const PeopleList = ({people, cbComponent} : Type) => {
 	console.count("LIST PEOPLE RENDERED");
-	
-	const people : TypeListPeople[]        = props.people;
-	const cbComponent : HandleComponentJax = props.cbComponent;
-	
 	return <>
 		{<WrapComp component={<ListPeopleBrief list={people} cbComponent={cbComponent}/>} msg={"List People Brief:"}/>}
 	</>;
 };
 
-export default ListPeople;
+export default PeopleList;

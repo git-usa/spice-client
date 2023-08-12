@@ -51,7 +51,7 @@ export const _lady : {
 	_text : (node? : any) => string
 	_addText : (text : string, node? : any) => typeof _lady;
 	_addHtml : (html : string, node? : any) => typeof _lady;
-	_replace : (content : string | null, node? : any) => typeof _lady;
+	_replace : (content ? : any, node? : any) => typeof _lady;
 	_space : (count : number, node? : any) => typeof _lady;
 	_line : (count : number, node? : any) => typeof _lady;
 	_capital : (node? : any) => typeof _lady;
@@ -72,8 +72,10 @@ export const _lady : {
 	_showData(data : any[], id ? : string | null, includes ? : string | string[], onShow ? : any, onClick ? : any, doSerial ? : boolean, schema ? : any, vertical? : boolean,
 	          carry? : any,
 	          node? : any) : typeof _lady;
-	_showObject(object : any, id : string | null, includes : string | string[], onShow : any, onClick : any, schema : any, vertical : boolean, carry : any,
-	            node? : any) : typeof _lady;
+	_showObject(object : any, id ? : string | null, includes ? : string, onShow ? : any, onClick ? : any, schema ? : any, vertical ? : boolean, carry ? : any,
+	            node? : HTMLElement | typeof _lady) : typeof _lady;
+	_showRecord(record : any, id ? : string | null, includes ? : string, onShow? : any, schema ? : any, vertical? : boolean, carry? : any,
+	            node? : HTMLElement | typeof _lady) : typeof _lady;
 	_repeat(tagName : string, times : number, dataItems : any, next : any, repeatData : any, tagIds : string[], styles : {[key : string] : any},
 	        attributes : {[key : string] : any}, classes : string[], node? : any) : typeof _lady;
 	_count(selector : string, node? : any) : number
@@ -88,10 +90,9 @@ export const _lady : {
 	_goTo(url : string, newTab : boolean, cursor : boolean, node? : HTMLElement | null) : typeof _lady;
 	_showForm(schema : any, inputClass : string | null, id : string | null, next : Function | undefined, submitId : string | null, method : string,
 	          node? : HTMLElement | null) : typeof _lady;
-	_getInputs<T>(selector : string, all ? : boolean, mustRequired ? : boolean, getArray ? : boolean, trim ? : boolean,
+	_getInputs<T>(selector ? : string, all ? : boolean, mustRequired ? : boolean, getArray ? : boolean, trim ? : boolean,
 	              node? : HTMLElement | null) : T | {[key : string] : string} | string[] | string | null
 	_clearInputs(selector : string, node? : HTMLElement | null) : NodeListOf<Element> | null
-	_showRecord(record : any, id : string | null, node? : HTMLElement | null) : typeof _lady;
 	_next(next : Function | undefined, node? : HTMLElement | null) : typeof _lady;
 };
 

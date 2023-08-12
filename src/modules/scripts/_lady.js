@@ -554,10 +554,7 @@ export const _lady = {
 			if(onClick) dataRow._click(onClick, dataRow, item, carry);
 		});
 		
-		doSerial && table._tag("tr")
-		                 ._createTag("td", `Total Records : ${data.length}`)
-		                 ._attributes({colSpan : ++heads.length})
-		                 ._bold();
+		doSerial && table._tag("tr")._createTag("td", `Total Records : ${data.length}`)._attributes({colSpan : ++heads.length})._bold();
 	},
 	
 	/**
@@ -622,8 +619,7 @@ export const _lady = {
 	_repeat    : function(tagName, times = 2, dataItems, next, repeatData, tagIds, styles, attributes, classes, node = this){
 		for(let index = 0; index < times; index++){
 			const value = (dataItems && dataItems[index]) || repeatData;
-			const tag   = this._tag(tagName, value, (tagIds && tagIds[index]) || null, true, node)
-			                  ._style(styles)._attributes(attributes)._classes(classes);
+			const tag   = this._tag(tagName, value, (tagIds && tagIds[index]) || null, true, node)._style(styles)._attributes(attributes)._classes(classes);
 			if(next) next(tag, value, index);
 		}
 		
@@ -720,8 +716,7 @@ export const _lady = {
 					break;
 				case "text":
 				default:
-					tag = form._tag("input", null, name)
-					          ._formatTag({}, {type, name, placeholder : hint, value : value || ""}, inputClass);
+					tag = form._tag("input", null, name)._formatTag({}, {type, name, placeholder : hint, value : value || ""}, inputClass);
 			}
 			next && next(tag, form);
 		});
@@ -764,15 +759,28 @@ export const _lady = {
 		return inputs;
 	},
 	
-	_showRecord : function(record, id = null, node = this){
+	_showRecord : function(record, includes, id = null, vertical = true, onShow = null, carry = null, node = this){
 		const table = this._tag("table", null, id, true, node);
-		// const keys  = Object.keys(record);
-		for(const key in record){
-			if(!record.hasOwnProperty(key)) continue;
-			const row = table._tag("tr");
-			row._tag("th", key)._capitalWords();
-			row._tag("td", record[key]);
+		const keys  = includes ? includes.split(" ") : Object.keys(record);
+		
+		if(vertical){
+			keys.forEach(key => {
+				const row = table._tag("tr");
+				row._tag("th", key)._capitalWords();
+				row._tag("td", record[key]);
+				if(onShow){
+				}
+			});
+		} else{
+			const headRow  = table._tag("tr");
+			const valueRow = table._tag("tr");
+			
+			keys.forEach(key => {
+				headRow._tag("th", key)._capitalWords();
+				valueRow._tag("td", record[key]);
+			});
 		}
+		
 		return table;
 	},
 	

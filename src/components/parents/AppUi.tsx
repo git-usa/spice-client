@@ -5,11 +5,10 @@ import UseComponent from "./UseComponent";
 import AppNavBar from "../containers/AppNavBar";
 import AppActionBar from "../containers/AppActionBar";
 import {ModalLogout} from "../containers/ModalLogout";
+import {_ladEleById} from "../../modules/scripts/_lady";
 import JaxLogout from "../../modules/ajaxCalls/JaxLogout";
 import type TypeResult from "../../modules/interfaces/TypeResult";
-import type {TypeProfileMin} from "../../modules/interfaces/TypeAll";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
-import {_ladEleById} from "../../modules/scripts/_lady";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
 
 const cbLogoutYes = (cbAfterOut : () => void, setResult : (result : TypeResult) => void) => {
@@ -41,9 +40,6 @@ const AppUi = ({user, cbAfterOut} : Type) => {
 	console.count("APP UI RENDERED");
 	console.info(user);
 	
-	// Main Component to be Loaded
-	const [component, setComponent] = useState(UseComponent(user ? "home" : "blank"));
-	
 	// Function To Render/Switch Between Components
 	const handleComponentJax : HandleComponentJax = (name, jax) => {
 		switch(name){
@@ -53,9 +49,14 @@ const AppUi = ({user, cbAfterOut} : Type) => {
 					modal.style.display = "block";
 				break;
 			default:
-				setComponent(UseComponent(name, jax, handleComponentJax));
+				// setComponent(UseComponent({name, jax, cbHandler : handleComponentJax}));
+				setComponent(<UseComponent cbHandler={handleComponentJax} name={name} jax={jax}/>);
 		}
 	};
+	
+	// Main Component to be Loaded
+	const [component, setComponent] = useState(UseComponent(
+		{name : user ? "home" : "blank", cbHandler : handleComponentJax}));
 	
 	return <>
 		{/* App Navigation Bar */}

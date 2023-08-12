@@ -27,7 +27,7 @@ const validate = (cbResult : (result : TypeResult) => void) => {
 	}, cbResult);
 };
 
-const CreatePeople = () => {
+const PeopleCreate = () => {
 	console.info("CREATE PEOPLE RENDERED");
 	const initial : TypeResult = {text : "Please input all fields", type : "info"};
 	const [result, setResult]  = useState(initial);
@@ -47,4 +47,4 @@ const CreatePeople = () => {
 	</>;
 	
 };
-export default CreatePeople;
+export default PeopleCreate;

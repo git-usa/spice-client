@@ -31,7 +31,7 @@ const validate = () => {
 	});
 };
 
-const CreateTeam = () => {
+const TeamCreate = () => {
 	
 	console.info("CREATE TEAM RENDERED");
 	
@@ -88,4 +88,4 @@ const CreateTeam = () => {
 	</>;
 	
 };
-export default CreateTeam;
+export default TeamCreate;

@@ -1,9 +1,13 @@
-interface Type{
-	component : any;
+import React from "react";
+
+interface TypeWrap{
+	component : React.JSX.Element;
 	msg : string;
 }
 
-interface TypeFallback{
-	component : any;
+export interface TypeFallback{
+	component : React.JSX.Element;
 	fallback : any;
 }
+
+export default TypeWrap;

@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import ResultBar from "../singles/ResultBar";
 
 interface Type{
-	component : any;
+	component : React.JSX.Element;
 	msg : string;
 }
 
 interface TypeFallback{
-	component : any;
+	component : React.JSX.Element;
 	fallback : any;
 }
 

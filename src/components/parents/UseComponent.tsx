@@ -3,15 +3,16 @@ import List from "./List";
 import Blank from "./Blank";
 import Create from "./Create";
 import Profile from "./Profile";
+import AppLogin from "./AppLogin";
 import {WrapComp} from "./WrapError";
 import ResultBar from "../singles/ResultBar";
-import AppHome from "../chidlren/AppChildren/AppHome";
-import type {HandleComponentJax, TypeJax} from "../../modules/interfaces/TypeJax";
-import AppLogin from "./AppLogin";
+import TypeWrap from "../../modules/interfaces/TypeWrap";
+import AppHome from "../chidlren/App/AppHome";
+import type {CbComponentJax} from "../../modules/interfaces/TypeJax";
 
-const wrap = (component : any, message : string) => <WrapComp component={component} msg={message}/>;
+const Wrap = ({component, msg} : TypeWrap) => <WrapComp component={component} msg={msg}/>;
 
-const UseComponent = (name : string, jax ? : TypeJax, cbComponentJax ? : HandleComponentJax) => {
+const UseComponent = ({name, jax, cbHandler : cbComponentJax} : CbComponentJax) => {
 	// console.clear();
 	console.info(`Using Component : ${name}`);
 	if(!name) throw Error("Missing Component Reference to Use");
@@ -19,9 +20,11 @@ const UseComponent = (name : string, jax ? : TypeJax, cbComponentJax ? : HandleC
 	if(!jax || !cbComponentJax){
 		switch(name){
 			case "blank":
-				return wrap(<Blank/>, "Blank Comp :");
+				// return Wrap({component : <Blank/>, msg : "Blank Comp :"});
+				return <Wrap component={<Blank/>} msg={"Blank Comp"}/>;
 			case "home":
-				return wrap(<AppHome/>, "App Home :");
+				return <Wrap component={<AppHome/>} msg={"App Home :"}/>;
+			// return Wrap({component : <AppHome/>, msg : "App Home :"});
 			default:
 				throw Error(`Invalid Component Reference Received : ${name}`);
 		}
@@ -29,25 +32,24 @@ const UseComponent = (name : string, jax ? : TypeJax, cbComponentJax ? : HandleC
 	
 	switch(name){
 		case "blank":
-			return wrap(<Blank/>, "Blank Comp :");
+			return <Wrap component={<Blank/>} msg={"Blank Component:"}/>;
 		case "home":
-			return wrap(<AppHome/>, "App Home :");
+			return <Wrap component={<AppHome/>} msg={"App Home:"}/>;
 		
 		case "create":
-			return wrap(<Create of={jax.of} by={jax.by}/>, "Error in Create Component");
+			return <Wrap component={<Create of={jax.of} by={jax.by}/>} msg={"Create Component:"}/>;
 		case"list":
-			return wrap(<List by={jax.by} of={jax.of} cbHandler={cbComponentJax}/>, "Error in List Component");
+			return <Wrap component={<List jax={jax} cbHandler={cbComponentJax}/>} msg={"List Component:"}/>;
 		case "profile":
-			return wrap(<Profile by={jax.by} of={jax.of} cbHandler={cbComponentJax}/>, "Error in Profile Component");
+			return <Wrap component={<Profile jax={jax} cbHandler={cbComponentJax}/>} msg={"Profile Component:"}/>;
 		
 		case "info":
 		case "pass":
 		case "error":
-			return wrap(<ResultBar text={jax.by} type={name}/>, "Error in Result Component");
+			return <Wrap component={<ResultBar text={jax.by} type={name}/>} msg={"Result Component:"}/>;
 		
 		case "login":
-			return wrap(<AppLogin result={jax.by.result} setRetry={jax.by.retry} cbAfterIn={jax.by.cbAfterIn}/>, "App Login:");
-		
+			return <Wrap component={<AppLogin result={jax.by.result} setRetry={jax.by.retry} cbAfterIn={jax.by.cbAfterIn}/>} msg={"App Login:"}/>;
 		default:
 			return <ResultBar text={`Invalid Component Reference Received : ${name}`} type={"error"}/>;
 	}

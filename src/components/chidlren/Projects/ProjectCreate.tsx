@@ -69,7 +69,7 @@ const getPeopleList = (cbList : (list : TypePeople[]) => void, cbResult : (resul
 	          });
 };
 
-const CreateProject = () => {
+const ProfileProject = () => {
 	
 	console.info("CREATE PROJECT RENDERED");
 	
@@ -111,4 +111,4 @@ const CreateProject = () => {
 	</>;
 	
 };
-export default CreateProject;
+export default ProfileProject;

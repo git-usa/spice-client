@@ -5,7 +5,7 @@ export interface TypeJax{
 
 export interface TypeComponentJax{
 	name : string;
-	jax : TypeJax;
+	jax? : TypeJax;
 }
 
 export interface HandleJax{
@@ -20,7 +20,8 @@ export interface CbJax extends TypeJax{
 	cbHandler : HandleJax;
 }
 
-export interface CbJaxHandleComponentJax extends TypeJax{
+export interface CbJaxHandleComponentJax{
+	jax : TypeJax;
 	cbHandler : HandleComponentJax;
 }
 

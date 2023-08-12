@@ -1,10 +1,10 @@
 import React from "react";
 import {WrapComp} from "./WrapError";
 import CreateLog from "../chidlren/Logs/CreateLog";
-import CreateTeam from "../chidlren/Teams/CreateTeam";
-import CreatePeople from "../chidlren/People/CreatePeople";
+import TeamCreate from "../chidlren/Teams/TeamCreate";
+import PeopleCreate from "../chidlren/People/PeopleCreate";
 import type TypeJax from "../../modules/interfaces/TypeJax";
-import CreateProject from "../chidlren/Projects/CreateProject";
+import ProfileProject from "../chidlren/Projects/ProjectCreate";
 
 const wrap = (component : any, message : string) => <WrapComp component={component} msg={message}/>;
 
@@ -13,11 +13,11 @@ const Create = (jax : TypeJax) => {
 	const getComponent = () => {
 		switch(jax.of){
 			case"people":
-				return wrap(<CreatePeople/>, "Error in Create Project Component");
+				return wrap(<PeopleCreate/>, "Error in Create Project Component");
 			case"project":
-				return wrap(<CreateProject/>, "Error in Create Project Component");
+				return wrap(<ProfileProject/>, "Error in Create Project Component");
 			case"team":
-				return wrap(<CreateTeam/>, "Error in Create Team Component");
+				return wrap(<TeamCreate/>, "Error in Create Team Component");
 			case "log":
 				return wrap(<CreateLog/>, "Error in Create Log Component");
 			default:
