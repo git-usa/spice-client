@@ -7,7 +7,7 @@ const JaxProfile = (jax : TypeJax, cbResult : HandleResultData) => {
 	console.info(msg);
 	// console.info(jax);
 	cbResult({type : "info", text : msg});
-	AjaxPostCall("http://localhost:8080/profile", jax.of, {id : jax.by}, cbResult);
+	AjaxPostCall("profile", jax.of, {id : jax.by}, cbResult);
 };
 
 export default JaxProfile;

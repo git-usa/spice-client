@@ -3,6 +3,11 @@ import type TypeResponse from "../interfaces/TypeResponse";
 import type {HandleResultData} from "../interfaces/TypeResult";
 
 export const AjaxPostCall = (url : string, service : string, params : any, cbResult : HandleResultData) => {
+	
+	url = `https://spice-server-6its.onrender.com/${url}`;
+	// url = `http://localhost:8080/${url}`;
+	console.info("SENDING POST REQUEST TO " + url);
+	
 	lats_post(
 		{
 			url,

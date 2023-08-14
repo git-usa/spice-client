@@ -4,6 +4,7 @@ import type TypeAjax from "../interfaces/TypeAjax";
  *
  * @param {TypeAjax} props
  */
+
 export const lats_ajax = (props : TypeAjax) => {
 	const params : any = props.params;
 	for(let key in params){
@@ -20,9 +21,9 @@ export const lats_ajax = (props : TypeAjax) => {
 	                            .join("&");
 	
 	// Create & Initialize New HTTP Request
-	const httpRequest = new XMLHttpRequest();
-	httpRequest.open(props.method || "post", props.url, true);
+	const httpRequest           = new XMLHttpRequest();
 	httpRequest.withCredentials = true;
+	httpRequest.open(props.method || "post", props.url, true);
 	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	
 	// If Next is Available, Call Next When Request is finished & Response is ready

@@ -182,9 +182,9 @@ export const lat_reverseArray = (arr) => {
 	return newArr;
 };
 
-export const lat_capital      = (text : string) => text.charAt(0).toUpperCase() + text.slice(1);
+export const lat_capital = (text : string) => text.charAt(0).toUpperCase() + text.slice(1);
 
-export const lat_mongoDate    = (dateValue, toUtc = true) => {
+export const lat_mongoDate = (dateValue, toUtc = true) => {
 	if(isNaN(Date.parse(dateValue))) return null;
 	const date       = new Date(!toUtc ? dateValue : dateValue.replace(/-/g, "\/").replace(/T.+/, ""));
 	const dateFormat = {
@@ -233,4 +233,10 @@ export const lat_mongoDate    = (dateValue, toUtc = true) => {
 	dateFormat.time24 = dateFormat.HOUR + ":" + dateFormat.minute + ":" + dateFormat.second;
 	
 	return dateFormat;
+};
+
+export const lat_trim = (text, charToRemove) => {
+	while(text.charAt(0) === charToRemove) text = text.length > 1 ? text.substring(1) : "";
+	while(text.charAt(text.length - 1) === charToRemove) text = text.length > 1 ? text.substring(0, text.length - 1) : "";
+	return text;
 };

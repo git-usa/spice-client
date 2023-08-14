@@ -6,7 +6,7 @@ const JaxList = (jax : TypeJax, cbResult : HandleResultData) => {
 	const msg = `GETTING LIST FROM SERVER FOR ${jax.of}`;
 	console.info(msg);
 	cbResult({type : "info", text : msg}, null);
-	AjaxPostCall("http://localhost:8080/list", jax.of, jax, cbResult);
+	AjaxPostCall("list", jax.of, jax, cbResult);
 };
 
 export default JaxList;

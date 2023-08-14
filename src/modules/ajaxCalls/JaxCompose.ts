@@ -7,7 +7,7 @@ const JaxCompose = (jax : TypeJax, cbResult : HandleResultData) => {
 	console.info(msg);
 	console.info(jax.by);
 	// cbResult({type : "info", text : msg});
-	AjaxPostCall("http://localhost:8080/compose", jax.of, jax.by, cbResult);
+	AjaxPostCall("compose", jax.of, jax.by, cbResult);
 };
 
 export default JaxCompose;
