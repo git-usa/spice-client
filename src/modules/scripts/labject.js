@@ -240,3 +240,14 @@ export const lat_trim = (text, charToRemove) => {
 	while(text.charAt(text.length - 1) === charToRemove) text = text.length > 1 ? text.substring(0, text.length - 1) : "";
 	return text;
 };
+
+export const lat_getCookie = (cookieName : string) : string | undefined => {
+	let cookieArr = document.cookie && document.cookie.split(";");
+	if(!cookieArr) return undefined;
+	for(let i = 0; i < cookieArr.length; i++){
+		let cookiePair = cookieArr[i].split("=");
+		if(cookieName === cookiePair[0].trim()){
+			return decodeURIComponent(cookiePair[1]);
+		}
+	}
+};

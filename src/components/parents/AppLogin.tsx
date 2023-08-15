@@ -4,8 +4,14 @@ import LoginNavBar from "../containers/LoginNavBar";
 import type TypeResult from "../../modules/interfaces/TypeResult";
 import {ModalLogin, showModalLogin} from "../containers/ModalLogin";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
+import {lat_getCookie} from "../../modules/scripts/labject";
 
 const AppLogin = (props : {result : TypeResult, setRetry : () => void, cbAfterIn : (user : TypePeopleSession) => void}) => {
+	      console.info("SHOWING DOCUMENT COOKIE");
+	      console.info(document.cookie);
+	      console.info(lat_getCookie("jwt_info_user"));
+	      console.info(lat_getCookie("jwt_info_out"));
+	
 	      return <>
 		      <LoginNavBar/>
 		      <ModalLogin cbAfterLogin={props.cbAfterIn}/>
