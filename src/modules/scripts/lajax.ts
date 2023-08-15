@@ -21,17 +21,20 @@ export const lats_ajax = (props : TypeAjax) => {
 	                            .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
 	                            .join("&");
 	
-	const auth = {
-		jwt_info_user     : lat_getCookie("jwt_info_user"),
-		jwt_info_user_out : lat_getCookie("jwt_info_user_out")
-	};
+	/*const auth = JSON.stringify({
+	 jwt_info_user     : lat_getCookie("jwt_info_user"),
+	 jwt_info_user_out : lat_getCookie("jwt_info_user_out")
+	 }
+	 );*/
+	
+	const auth = `jwt_info_user=${lat_getCookie("jwt_info_user")};jwt_info_out=${lat_getCookie("jwt_info_out")}`;
 	
 	// Create & Initialize New HTTP Request
 	const httpRequest           = new XMLHttpRequest();
 	httpRequest.withCredentials = true;
 	httpRequest.open(props.method || "post", props.url, true);
 	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	httpRequest.setRequestHeader("Authorization", JSON.stringify(auth));
+	httpRequest.setRequestHeader("Authorization", auth);
 	
 	// If Next is Available, Call Next When Request is finished & Response is ready
 	httpRequest.onreadystatechange = function(this : XMLHttpRequest){
