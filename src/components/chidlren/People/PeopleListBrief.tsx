@@ -7,13 +7,14 @@ import type {HandleComponentJax} from "../../../modules/interfaces/TypeJax";
 interface Type{
 	people : TypeListPeople[];
 	cbComponent : HandleComponentJax;
+	isBrief? : boolean;
 }
 
-const PeopleList = ({people, cbComponent} : Type) => {
-	console.count("LIST PEOPLE RENDERED");
+const PeopleListBrief = ({people, cbComponent, isBrief = true} : Type) => {
+	console.count("LIST PEOPLE BRIEF RENDERED");
 	return <>
-		{<WrapComp component={<ListPeopleBrief list={people} cbComponent={cbComponent} isBrief={false}/>} msg={"List People:"}/>}
+		{<WrapComp component={<ListPeopleBrief list={people} cbComponent={cbComponent} isBrief={isBrief}/>} msg={"List People Brief:"}/>}
 	</>;
 };
 
-export default PeopleList;
+export default PeopleListBrief;

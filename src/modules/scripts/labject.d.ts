@@ -36,6 +36,8 @@ export function lat_reverseArray<T>(arr : T[]) : T[] | null;
 
 export function lat_capital(text : string) : string;
 
-export function lat_mongoDate(dateValue : string, toUtc : boolean) : typeof ladyDate;
+export function lat_mongoDate(dateValue : string, toUtc ? : boolean) : typeof ladyDate;
 
 export function lat_getCookie(cookieName : string) : string;
+
+export function lat_onEnter(event : KeyboardEvent<HTMLInputElement>, next : () => void) : void;

@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState, createContext} from "react";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
-import {TypeProfileMin} from "../../modules/interfaces/TypeAll";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
 
 interface TypeContext{

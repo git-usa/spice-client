@@ -38,10 +38,12 @@ const UseComponent = ({name, jax, cbHandler : cbComponentJax} : CbComponentJax) 
 		
 		case "create":
 			return <Wrap component={<Create of={jax.of} by={jax.by}/>} msg={"Create Component:"}/>;
-		case"list":
-			return <Wrap component={<List jax={jax} cbHandler={cbComponentJax}/>} msg={"List Component:"}/>;
 		case "profile":
 			return <Wrap component={<Profile jax={jax} cbHandler={cbComponentJax}/>} msg={"Profile Component:"}/>;
+		
+		case "list":
+		case"listBrief":
+			return <Wrap component={<List jax={jax} cbHandler={cbComponentJax} isBrief={name !== "list"}/>} msg={"List Component:"}/>;
 		
 		case "info":
 		case "pass":

@@ -1,11 +1,11 @@
-import ListRender from "./ListRender";
 import React from "react";
+import ListRender from "./ListRender";
 import {_lady} from "../../../modules/scripts/_lady";
 import {TypeJax} from "../../../modules/interfaces/TypeJax";
 import {TypeListBrief, TypeListTeam} from "../../../modules/interfaces/TypeList";
 
-const ListTeamsBrief = ({list, cbComponent, title = "Teams List", id = "teamTab"} : TypeListBrief) => {
-	const includes = "name category status manager project createdAt brief";
+const ListTeamsBrief = ({list, cbComponent, title = "Teams List", id = "teamTab", isBrief = true} : TypeListBrief & {isBrief? : boolean}) => {
+	const includes = `name category status ${isBrief ? "members manager project" : ""} createdAt brief`;
 	const onShow   = (c : typeof _lady, h : string, v : any, i : TypeListTeam, carry : any) => {
 		if(!carry) return;
 		

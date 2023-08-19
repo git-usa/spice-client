@@ -7,9 +7,10 @@ import type {HandleComponentJax} from "../../../modules/interfaces/TypeJax";
 interface Type{
 	projects : TypeListProject[];
 	cbComponent : HandleComponentJax;
+	isBrief? : boolean;
 }
 
-const ProjectsList = ({projects, cbComponent} : Type) => {
+const ProjectsListBrief = ({projects, cbComponent, isBrief = true} : Type) => {
 	console.info("LIST PROJECTS RENDERED");
 	return <>
 		{/*<div id={"listTable"}></div>*/}
@@ -17,4 +18,4 @@ const ProjectsList = ({projects, cbComponent} : Type) => {
 	</>;
 };
 
-export default ProjectsList;
+export default ProjectsListBrief;

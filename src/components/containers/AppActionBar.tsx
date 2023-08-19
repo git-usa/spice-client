@@ -1,35 +1,39 @@
 import React from "react";
 import {lat_mapToArray} from "../../modules/scripts/labject.js";
+import {ActionGroups, TypeAction, TypeActionOption} from "../../modules/interfaces/TypeAction";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
 
-interface TypeAction{
-	create : {text : String, super : boolean};
-	list : {text : String, super : boolean};
-}
+const ShowHead = (props : {head : string}) => <>
+	<button className={"w3-button la-capital"}>{props.head}
+		<i className={"la-caret-down-after"} style={{fontSize : "12px"}}></i>
+	</button>
+</>;
 
-export const navGroups : any = {
-	people  : {
-		create : {text : "create", super : true},
-		// edit   : {text : "edit", super : true},
-		list : {text : "my people"}
-	},
-	project : {
-		create : {text : "create", super : true},
-		// edit   : {text : "edit", super : true},
-		list : {text : "my projects"}
-	},
-	team    : {
-		create : {text : "create"},
-		// edit   : {text : "edit"},
-		list : {text : "my teams"}
-	},
-	message : {
-		list : {text : "my messages"}
-	},
-	log     : {
-		create : {text : "create"},
-		list   : {text : "my logs"}
-	}
+const ShowItem = (props : {action : string, group : string, text : string, cbComponent : HandleComponentJax}) => <>
+	<a href={"#"}
+	   key={`appActionBarLink${props.action}`}
+	   onClick={() => props.cbComponent(props.action, {of : props.group, by : null})}
+	   className={"w3-bar-item w3-button la-capital"}>{props.text}</a>
+</>;
+
+const ToBar = (props : {group : string, actions : TypeAction | undefined, isSuper : boolean, cbComponent : HandleComponentJax}) => {
+	return <div key={`appActionBarGroup${props.group}`} className={"w3-dropdown-hover"}>
+		{/* Show Caret/Some Sign Next to group as List Title */}
+		{<ShowHead head={props.group}/>}
+		
+		{/* Dropdown List of Actions for Each Group */}
+		<div className={"w3-dropdown-content w3-bar-block w3-card-4"}>
+			{
+				/**
+				 * Process Each Item of Actions and return array of Components to show in Dropdown List
+				 */
+				lat_mapToArray(props.actions, (action : string, obj : TypeActionOption) => {
+					if(obj.super && !props.isSuper) return;
+					return <ShowItem key={`${props.group + action}item`} action={action} group={props.group} text={obj.text} cbComponent={props.cbComponent}/>;
+				})
+			}
+		</div>
+	</div>;
 };
 
 /**
@@ -40,37 +44,23 @@ export const navGroups : any = {
  */
 const AppActionBar = (props : {cbComponent : HandleComponentJax, isSuper? : boolean}) => {
 	
-	const isSuper     = props.isSuper;
+	const isSuper     = props.isSuper || false;
 	const cbComponent = props.cbComponent;
 	
 	/**
-	 * Process Each Item of Nav Groups and return array of Components to show on Action Bar
-	 * @type {[]}
+	 *
+	 * @param {string} group
+	 * @param {TypeAction | undefined} actions
+	 * @return {JSX.Element}
 	 */
-	const bar = lat_mapToArray(navGroups, (group : any, actions : TypeAction) => {
-		return <div key={`appActionBarGroup${group}`} className={"w3-dropdown-hover"}>
-			{/* Show Caret/Some Sign Next to group as List Title */}
-			<button className={"w3-button la-capital"}>{group}
-				<i className={"la-caret-down-after"} style={{fontSize : "12px"}}></i>
-			</button>
-			
-			{/* Dropdown List of Actions for Each Group */}
-			<div className={"w3-dropdown-content w3-bar-block w3-card-4"}>
-				{
-					/**
-					 * Process Each Item of Actions and return array of Components to show in Dropdown List
-					 */
-					lat_mapToArray(actions, (action : string, obj) => {
-						if(obj.super && !isSuper) return;
-						return <a href={"#"}
-						          key={`appActionBarLink${action}`}
-						          onClick={() => cbComponent(action, {of : group, by : null})}
-						          className={"w3-bar-item w3-button la-capital"}>{obj.text}</a>;
-					})
-				}
-			</div>
-		</div>;
-	});
+	const toBar = (group : string, actions : TypeAction | undefined) =>
+		<ToBar key={`${group}BarItem`} group={group} actions={actions} isSuper={isSuper} cbComponent={cbComponent}/>;
+	
+	/**
+	 * Process Each Item of Nav Groups and return array of Components to show on Action Bar
+	 * @return {JSX.Element[]}
+	 */
+	const bar = lat_mapToArray(ActionGroups, toBar);
 	
 	/* Action Bar */
 	return <>

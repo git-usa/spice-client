@@ -11,7 +11,7 @@ import type {CbJaxHandleComponentJax} from "../../modules/interfaces/TypeJax";
 import {lat_isValidArray, lat_isValidObject} from "../../modules/scripts/labject.js";
 
 const btnReloadId = "btnReload";
-const resultBarId = "setListResult";
+const resultBarId = "setListBriefResult";
 
 const showResult   = (result : TypeResult) => showResultBar(resultBarId, result);
 const toggleButton = (enable = false) => _ladEleById<HTMLButtonElement>(btnReloadId).disabled = !enable;
@@ -21,8 +21,9 @@ const toggleButton = (enable = false) => _ladEleById<HTMLButtonElement>(btnReloa
  * @constructor
  * @param jax
  * @param cbHandler
+ * @param isBrief
  */
-const List = ({jax, cbHandler} : CbJaxHandleComponentJax) => {
+const List = ({jax, cbHandler, isBrief} : CbJaxHandleComponentJax & {isBrief : boolean}) => {
 	console.count("LIST RENDERED");
 	const [reload, setReload]       = useState<boolean>();
 	const [component, setComponent] = useState(<Blank/>);
@@ -47,8 +48,8 @@ const List = ({jax, cbHandler} : CbJaxHandleComponentJax) => {
 			}
 			
 			console.info("SET COMPONENT");
-			setComponent(<WrapComp component={<ListSwitch of={jax.of} list={data} cbHandler={cbHandler}/>} msg={"List Component:"}/>);
-		});
+			setComponent(<WrapComp component={<ListSwitch of={jax.of} list={data} cbHandler={cbHandler} isBrief={isBrief}/>} msg={"List Component:"}/>);
+		}, isBrief);
 	}, [jax, reload]);
 	
 	return <>

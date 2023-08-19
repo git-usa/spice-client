@@ -1,11 +1,11 @@
-import ListRender from "./ListRender";
 import React from "react";
+import ListRender from "./ListRender";
 import {_lady} from "../../../modules/scripts/_lady";
 import {TypeListBrief, TypeListPeople} from "../../../modules/interfaces/TypeList";
 
-const ListPeopleBrief = ({list, cbComponent, title = "People List", id = "peopleTab"} : TypeListBrief) => {
+const ListPeopleBrief = ({list, cbComponent, title = "People List", id = "peopleTab", isBrief = true} : TypeListBrief & {isBrief? : boolean}) => {
 	
-	const includes = "name role login status createdAt projects teams";
+	const includes = `name role login status createdAt ${isBrief ? "projects teams" : ""}`;
 	
 	const onShow = (c : typeof _lady, h : string, v : any, i : TypeListPeople, carry : any) => {
 		if(!carry) return;
@@ -18,7 +18,7 @@ const ListPeopleBrief = ({list, cbComponent, title = "People List", id = "people
 	};
 	
 	return <div className={"w3-padding-hor-24 la-container"}>
-		<h4 className={`la-capital la-bold w3-padding la-l la-s w3-khaki`}>{title}</h4>
+		<h4 className={`la-capital la-bold w3-padding la-l la-s w3-khaki`}>{title + (isBrief ? " With Brief" : "")}</h4>
 		<ListRender list={list} id={id} onShow={onShow} includes={includes} carry={true}/>
 	</div>;
 	

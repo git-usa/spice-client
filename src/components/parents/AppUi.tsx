@@ -10,6 +10,7 @@ import JaxLogout from "../../modules/ajaxCalls/JaxLogout";
 import type TypeResult from "../../modules/interfaces/TypeResult";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
+import LogCreate from "../chidlren/Logs/LogCreate";
 
 const cbLogoutYes = (cbAfterOut : () => void, setResult : (result : TypeResult) => void) => {
 	const btnYes : HTMLButtonElement    = _ladEleById("btnLogoutYes");
@@ -79,6 +80,9 @@ const AppUi = ({user, cbAfterOut} : Type) => {
 					<AppActionBar cbComponent={handleComponentJax} isSuper={user.super}/>
 				</div>
 			</div>
+			
+			{/*App Log Creator*/}
+			{/*<div className={"w3-container w3-white"}><LogCreate/></div>*/}
 		</div>
 		
 		{/* Main Component */}

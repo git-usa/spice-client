@@ -1,9 +1,9 @@
+import React, {useEffect} from "react";
 import _l from "../../../modules/scripts/_lady";
 import {TypeRender} from "../../../modules/interfaces/TypeAll";
-import React, {useEffect} from "react";
 
 interface Type extends TypeRender{
-	list : any[];
+	list ?: any[];
 }
 
 const ListRender = ({id = "listTab", list, includes, onShow, carry = true} : Type) => {

@@ -4,6 +4,7 @@ import {_lady} from "../../../modules/scripts/_lady";
 import {lat_isValidObject} from "../../../modules/scripts/labject";
 import {HandleComponentJax} from "../../../modules/interfaces/TypeJax";
 import {TypeProfile, TypeProfileTeam} from "../../../modules/interfaces/TypeProfile";
+import ListRender from "../Lists/ListRender";
 
 interface Type{
 	profile : TypeProfileTeam;
@@ -16,24 +17,30 @@ const ProfileTeam = ({profile, cbHandler} : Type) => {
 		
 		let profileId : string | undefined = undefined;
 		
+		const process = (value : any, item : string, id : string, replace : string) => {
+			if(!lat_isValidObject(value)) return false;
+			carry     = item;
+			profileId = id;
+			cell._replace(replace);
+			return true;
+		};
+		
 		switch(head){
+			case "name":
+				if(carry !== "member") break;
+				process(item, "people", item.id, item.name);
+				break;
 			case "creator":
-				if(!lat_isValidObject(profile.creator)) break;
-				carry     = "people";
-				profileId = profile.creator.id;
-				cell._replace(profile.creator.name);
+				process(profile.creator, "people", profile.creator?.id, profile.creator?.name);
 				break;
 			case "manager":
-				if(!lat_isValidObject(profile.manager)) break;
-				carry     = "people";
-				profileId = profile.manager.id;
-				cell._replace(profile.manager.name);
+				process(profile.manager, "people", profile?.manager.id, profile.manager?.name);
 				break;
 			case "project":
-				if(!lat_isValidObject(profile.project)) break;
-				carry     = "project";
-				profileId = profile.project.id;
-				cell._replace(profile.project.name);
+				process(profile.project, "project", profile?.project.id, profile.project?.name);
+				break;
+			case "members":
+				cell._replace(value);
 				break;
 		}
 		
@@ -45,10 +52,16 @@ const ProfileTeam = ({profile, cbHandler} : Type) => {
 		cell._capitalWords();
 	};
 	
+	profile.profile.members = (profile.members && profile.members.length) || 0;
+	
 	return <>
 		<div className={"w3-padding-hor-12"}>
 			<h3 className={"w3-green w3-border w3-padding la-noMargin la-noBorder"}>Profile</h3>
-			<ProfileRender onShow={onShow} profile={profile.profile} includes={"name status creator manager project createdAt brief"} carry={"project"}/>
+			<ProfileRender onShow={onShow} profile={profile.profile} includes={"name status creator manager members project createdAt brief"} carry={"project"}/>
+		</div>
+		<div className={"w3-padding-hor-12"}>
+			<h3 className={"w3-khaki w3-border w3-padding la-noMargin la-noBorder"}>Team Members</h3>
+			<ListRender id={"teamMembersTab"} list={profile.members} includes={"name role status createdAt"} onShow={onShow} carry={"member"}/>
 		</div>
 	</>;
 };

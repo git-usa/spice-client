@@ -251,3 +251,9 @@ export const lat_getCookie = (cookieName : string) : string | undefined => {
 		}
 	}
 };
+
+export const lat_onEnter = (event : KeyboardEvent, next) => {
+	if(event.key === "Enter" || event.keyCode === 13){
+		next();
+	}
+};

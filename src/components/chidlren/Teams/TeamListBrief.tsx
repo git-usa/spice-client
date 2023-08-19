@@ -9,11 +9,11 @@ interface Type{
 	cbComponent : HandleComponentJax;
 }
 
-const TeamList = ({teams, cbComponent} : Type) => {
+const TeamListBrief = ({teams, cbComponent} : Type) => {
 	console.info("LIST PROJECTS RENDERED");
 	return <>
 		{<WrapComp component={<ListTeamsBrief list={teams} cbComponent={cbComponent}/>} msg={"List Teams Brief:"}/>}
 	</>;
 };
 
-export default TeamList;
+export default TeamListBrief;

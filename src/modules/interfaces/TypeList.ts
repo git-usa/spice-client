@@ -28,9 +28,19 @@ export interface TypeListPeople extends TypeList{
 	teams : number;
 }
 
+export interface TypeListLog{
+	creator : TypeProfileMin,
+	action : string,
+	path : string,
+	document : string,
+	status : string,
+	brief : string,
+	createdAt : Date
+}
+
 export interface TypeListBrief{
 	id? : string;
 	title? : string;
-	list : (TypeListPeople | TypeListProject | TypeListTeam)[];
+	list : (TypeListPeople | TypeListProject | TypeListTeam | TypeListLog)[];
 	cbComponent : HandleComponentJax;
 }

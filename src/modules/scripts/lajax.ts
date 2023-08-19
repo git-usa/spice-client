@@ -28,17 +28,16 @@ export const lats_ajax = (props : TypeAjax) => {
 	 );*/
 	
 	const loginCook  = lat_getCookie("jwt_info_user");
-	const logoutCook = lat_getCookie("jwt_info_out");
+	const logoutCook = lat_getCookie("jwt_info_user_out");
 	
-	const auth = loginCook ? `jwt_info_user=${loginCook};jwt_info_out=${logoutCook}` : undefined;
+	const auth = loginCook ? `jwt_info_user=${loginCook};jwt_info_user_out=${logoutCook}` : undefined;
 	
 	// Create & Initialize New HTTP Request
 	const httpRequest           = new XMLHttpRequest();
 	httpRequest.withCredentials = true;
 	httpRequest.open(props.method || "post", props.url, true);
 	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	if(auth)
-		httpRequest.setRequestHeader("Authorization", auth);
+	if(auth) httpRequest.setRequestHeader("Authorization", auth);
 	
 	// If Next is Available, Call Next When Request is finished & Response is ready
 	httpRequest.onreadystatechange = function(this : XMLHttpRequest){

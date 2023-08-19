@@ -27,10 +27,11 @@ export interface TypeProfileProject extends TypeProfile{
 }
 
 export interface TypeProfileTeam extends TypeProfile{
-	profile : TypeProfile & {brief : string};
+	profile : TypeProfile & {brief? : string, members ?: number};
 	creator : TypeProfileMin;
 	project : TypeProfileMin;
 	manager : TypeProfileMin;
+	members? : TypeProfileMin[];
 }
 
 export interface TypeProfileAny{
