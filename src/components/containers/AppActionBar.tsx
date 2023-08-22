@@ -1,7 +1,7 @@
 import React from "react";
 import {lat_mapToArray} from "../../modules/scripts/labject.js";
-import {ActionGroups, TypeAction, TypeActionOption} from "../../modules/interfaces/TypeAction";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
+import {ActionGroups, TypeAction, TypeActionOption} from "../../modules/interfaces/TypeAction";
 
 const ShowHead = (props : {head : string}) => <>
 	<button className={"w3-button la-capital"}>{props.head}

@@ -4,7 +4,7 @@ import {WrapComp} from "./WrapError";
 import UseComponent from "./UseComponent";
 import AppNavBar from "../containers/AppNavBar";
 import AppActionBar from "../containers/AppActionBar";
-import {ModalLogout} from "../containers/ModalLogout";
+import {ModalLogout} from "../modals/ModalLogout";
 import {_ladEleById} from "../../modules/scripts/_lady";
 import JaxLogout from "../../modules/ajaxCalls/JaxLogout";
 import type TypeResult from "../../modules/interfaces/TypeResult";

@@ -5,11 +5,13 @@ export interface TypeProfileMin{
 	name : string;
 	
 	super? : boolean;
+	status? : string;
+	createdAt? : Date;
 }
 
 export interface TypeRender{
 	id? : string;
 	includes? : string;
 	carry? : any;
-	onShow ?: (cell : typeof _lady, head : string, value : any, item : any, carry : any) => void;
+	onShow? : (cell : typeof _lady, item : any, carry : any, head : string, value : any) => void;
 }

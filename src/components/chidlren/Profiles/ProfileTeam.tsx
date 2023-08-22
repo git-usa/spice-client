@@ -12,8 +12,8 @@ interface Type{
 }
 
 const ProfileTeam = ({profile, cbHandler} : Type) => {
-	const onShow = (cell : typeof _lady, head : string, value : any, item : TypeProfile, carry : any) => {
-		if(!carry) return;
+	const onShow = (cell : typeof _lady, item : TypeProfile, carry : any, h : string, v : any) => {
+		if(!h) return;
 		
 		let profileId : string | undefined = undefined;
 		
@@ -25,7 +25,7 @@ const ProfileTeam = ({profile, cbHandler} : Type) => {
 			return true;
 		};
 		
-		switch(head){
+		switch(h){
 			case "name":
 				if(carry !== "member") break;
 				process(item, "people", item.id, item.name);
@@ -40,7 +40,7 @@ const ProfileTeam = ({profile, cbHandler} : Type) => {
 				process(profile.project, "project", profile?.project.id, profile.project?.name);
 				break;
 			case "members":
-				cell._replace(value);
+				cell._replace(v);
 				break;
 		}
 		
@@ -57,7 +57,7 @@ const ProfileTeam = ({profile, cbHandler} : Type) => {
 	return <>
 		<div className={"w3-padding-hor-12"}>
 			<h3 className={"w3-green w3-border w3-padding la-noMargin la-noBorder"}>Profile</h3>
-			<ProfileRender onShow={onShow} profile={profile.profile} includes={"name status creator manager members project createdAt brief"} carry={"project"}/>
+			<ProfileRender onShow={onShow} profile={profile.profile} includes={"name status manager members project createdAt brief"} carry={"project"}/>
 		</div>
 		<div className={"w3-padding-hor-12"}>
 			<h3 className={"w3-khaki w3-border w3-padding la-noMargin la-noBorder"}>Team Members</h3>

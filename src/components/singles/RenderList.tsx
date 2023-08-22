@@ -2,28 +2,31 @@ import React from "react";
 import {TypeProfileMin} from "../../modules/interfaces/TypeAll";
 import Blank from "../parents/Blank";
 
-interface TypeRender{
+interface TypeRenderList{
 	id : string,
 	title? : string,
+	enable? : boolean;
+	required? : boolean;
 	addClass? : string;
-	list ?: TypeProfileMin[],
+	list? : TypeProfileMin[],
 	onChange? : (listId : string) => void
 }
 
-const RenderList = ({id, title, list, onChange, addClass = "la-l2 la-s"} : TypeRender) => {
-	if(!list) return  <Blank/>
+const RenderList = ({id, title, list, onChange, addClass = "la-l2 la-s", required, enable} : TypeRenderList) => {
+	if(!list) return <Blank/>;
 	
 	const renderedList = [
-		<option key={`listMemberOptionNoId`} disabled={true} value={undefined}>Select {title}</option>,
+		<option key={`list${id}OptionNoId`} disabled={true} value={undefined}>Select {title}</option>,
 		...list.map(item => {
-			return <option key={`listMember${item.id}`} value={item.id}>{item.name}</option>;
+			return <option key={`list${id}${title}${item.id}`} value={item.id}>{item.name}</option>;
 		})
 	];
 	
 	return <>
 		<div className={addClass}>
 			{title ? <h4>{title}</h4> : <></>}
-			<select id={id} defaultValue={`Select ${title}`} className={"w3-input w3-khaki la-capital"} onChange={() => onChange && onChange(id)}>{renderedList}</select>
+			<select required={required} disabled={!enable} id={id} defaultValue={`Select ${title}`} className={"w3-input w3-khaki la-capital"}
+			        onChange={() => onChange && onChange(id)}>{renderedList}</select>
 		</div>
 	</>;
 };

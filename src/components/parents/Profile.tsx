@@ -9,7 +9,7 @@ import JaxProfile from "../../modules/ajaxCalls/JaxProfile";
 import ProfileSwitch from "../chidlren/Profiles/ProfileSwitch";
 import {lat_isValidObject} from "../../modules/scripts/labject";
 import type {TypeResult} from "../../modules/interfaces/TypeResult";
-import {ModalCompose, showModalCompose} from "../containers/ModalCompose";
+import {ModalCompose, showModalCompose} from "../modals/ModalCompose";
 import type {CbJaxHandleComponentJax} from "../../modules/interfaces/TypeJax";
 
 const btnReloadId  = "btnReload";

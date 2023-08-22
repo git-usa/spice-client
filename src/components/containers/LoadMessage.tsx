@@ -1,12 +1,12 @@
 import React from "react";
-import {ModalCompose} from "./ModalCompose";
+import WrapError from "../parents/WrapError";
+import {ModalCompose} from "../modals/ModalCompose";
 import JaxUpdate from "../../modules/ajaxCalls/JaxUpdate";
-import {lat_mongoDate} from "../../modules/scripts/labject.js";
+import JaxCompose from "../../modules/ajaxCalls/JaxCompose";
 import type TypeJax from "../../modules/interfaces/TypeJax";
+import {lat_mongoDate} from "../../modules/scripts/labject.js";
 import type {HandleResult} from "../../modules/interfaces/TypeResult";
 import type {TypeMessageExt} from "../../modules/interfaces/TypeMessage";
-import JaxCompose from "../../modules/ajaxCalls/JaxCompose";
-import WrapError from "../parents/WrapError";
 
 const LoadMessage = (props : {message : TypeMessageExt}) => {
 	// console.count("LOAD MESSAGE RENDERED");

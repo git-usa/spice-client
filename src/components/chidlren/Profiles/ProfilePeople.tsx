@@ -15,12 +15,12 @@ interface Type{
 
 const ProfilePeople = ({profile, cbHandler} : Type) => {
 	console.info(profile);
-	const onShow = (cell : typeof _lady, head : string, value : any, item : TypeProfile | TypeProject, carry : any) => {
-		if(!carry) return;
+	const onShow = (cell : typeof _lady, item : TypeProfile | TypeProject, carry : any, h : string) => {
+		if(!h) return;
 		
 		let profileId : string | undefined = undefined;
 		
-		switch(head){
+		switch(h){
 			case "projects":
 				cell._replace(profile.projects.length);
 				break;
@@ -57,7 +57,7 @@ const ProfilePeople = ({profile, cbHandler} : Type) => {
 	return <>
 		<div className={"w3-padding-hor-12"}>
 			<h3 className={"w3-green w3-border w3-padding la-noMargin la-noBorder"}>Profile</h3>
-			<ProfileRender onShow={onShow} profile={profile.profile} includes={"name status role super projects teams creator createdAt"} carry={"people"}/>
+			<ProfileRender onShow={onShow} profile={profile.profile} includes={"name status role super projects teams createdAt"} carry={"people"}/>
 		</div>
 		<div className={"w3-padding-hor-12"}>
 			<h3 className={"w3-khaki w3-border w3-padding la-noMargin la-noBorder"}>Projects Managing</h3>

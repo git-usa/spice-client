@@ -60,7 +60,7 @@ export const _lady : {
 	_copyNode : (id? : string | null, appendTo? : HTMLElement | null, node? : HTMLElement) => HTMLElement | null
 	_deleteNode : (nodeId : string, node? : HTMLElement) => HTMLElement | null
 	_moveNode : (moveNode : any, beforeNode : any, node? : HTMLElement) => HTMLElement | null
-	_div : (content : string | null, id : string | null, node? : HTMLElement) => typeof _lady;
+	_div : (content ?: string | null, id ?: string | null, node? : HTMLElement) => typeof _lady;
 	_process : (text : string, id : string | null, node? : HTMLElement) => typeof _lady;
 	_info : (text : string, id : string | null, node? : HTMLElement) => typeof _lady;
 	_error : (text : string, id ? : string | null, node? : HTMLElement) => typeof _lady;

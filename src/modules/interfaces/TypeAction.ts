@@ -28,25 +28,27 @@ export const ActionGroups : TypeGroups = {
 	project : {
 		create    : {text : "create", super : true},
 		list      : {text : "list"},
-		listBrief : {text : "projects brief", super : true}
+		listBrief : {text : "projects brief"}
 	},
 	team    : {
 		create    : {text : "create", super : true},
 		list      : {text : "list"},
-		listBrief : {text : "teams  brief", super : true}
+		listBrief : {text : "teams  brief"}
 	},
 	member  : {
-		create : {text : "create", super : true},
-		list   : {text : "list"}
+		create    : {text : "create", super : true},
+		listBrief : {text : "list brief"}
 	},
 	task    : {
-		create : {text : "create", super : true}
+		create    : {text : "create", super : true},
+		listBrief : {text : "tasks  brief"}
 	},
 	message : {
 		listBrief : {text : "my messages"}
 	},
 	log     : {
-		create : {text : "create"},
-		list   : {text : "logs"}
+		create    : {text : "create"},
+		list      : {text : "logs"},
+		listBrief : {text : "logs brief"}
 	}
 };

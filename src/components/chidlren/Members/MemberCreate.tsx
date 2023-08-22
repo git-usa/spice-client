@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
+
 import RenderList from "../../singles/RenderList";
 import {showResultBar} from "../../singles/ResultBar";
 import LoadList from "../../../modules/dynamic/LoadList";
+import {lat_onEnter} from "../../../modules/scripts/labject";
 import JaxCreate from "../../../modules/ajaxCalls/JaxCreate";
 import TypeResult from "../../../modules/interfaces/TypeResult";
 import {_ladEleById as getEle} from "../../../modules/scripts/_lady";
-import {lat_onEnter} from "../../../modules/scripts/labject";
 
 const formId      = "formCreateMember";
 const teamId      = "selTeamForMember";
@@ -21,7 +22,7 @@ const MemberCreate = () => {
 	const role                  = useRef<HTMLInputElement>(null);
 	const [team, setTeam]       = useState<string | undefined>(undefined);
 	const [member, setMember]   = useState<string | undefined>(undefined);
-	const [project, setProject] = useState<string | undefined>(undefined);
+	// const [project, setProject] = useState<string | undefined>(undefined);
 	
 	const [listTeams, setTeams]       = useState(undefined);
 	const [listPeople, setPeople]     = useState(undefined);
@@ -33,33 +34,32 @@ const MemberCreate = () => {
 	 * LOAD LISTS
 	 */
 	
-	const loadProjects = () => {
-		setEnable(false);
-		setTeam(undefined);
-		setMember(undefined);
-		setProject(undefined);
-		
-		setTeams(undefined);
-		setPeople(undefined);
-		setProjects(undefined);
-		
-		LoadList("project", "Project", cbResult, (list) => {
-			setProjects(list);
-		});
+	const loadProjects = (forceLoad = false) => {
+		if(!listProjects || forceLoad){
+			setEnable(false);
+			
+			setTeam(undefined);
+			setMember(undefined);
+			// setProject(undefined);
+			
+			setTeams(undefined);
+			setPeople(undefined);
+			setProjects(undefined);
+			
+			LoadList("project", "Project", cbResult, (list) => setProjects(list));
+		}
 	};
 	
 	const loadTeams = (project : string) => {
 		setTeams(undefined);
-		if(project){
-			LoadList("team", "Team", cbResult, (list) => {
-				setTeams(list);
-			}, {project});
-		}
+		LoadList("team", "Team", cbResult, (list) => {
+			setTeams(list);
+		}, {project});
 	};
 	
 	const loadPeople = (team : string) => {
 		setPeople(undefined);
-		if(team) LoadList("people", "People", cbResult, (list) => {
+		LoadList("people", "People", cbResult, (list) => {
 			setPeople(list);
 		}, {team});
 	};
@@ -90,7 +90,7 @@ const MemberCreate = () => {
 	
 	const submit = () => {
 		if(!role || !role.current) return;
-		const params = {project, team, member, role : role.current.value};
+		const params = {team, member, role : role.current.value};
 		
 		console.info(params);
 		
@@ -108,17 +108,25 @@ const MemberCreate = () => {
 	};
 	
 	const onReload = () => {
-		loadProjects();
+		loadProjects(true);
 	};
 	
-	return <>
+	return <div className={"w3-padding-hor-32"}>
+		<div>
+			<h3 className={"la-noMargin"}>Create Team Member</h3>
+		</div>
 		<div id={formId} className={"w3-padding-hor-12 la-container flex-center-vertical"}>
 			{<RenderList id={projectId} title={"Project"} list={listProjects} onChange={onChange}/>}
 			{<RenderList id={teamId} title={"Team"} list={listTeams} onChange={onChange}/>}
 			{<RenderList id={peopleId} title={"People"} list={listPeople} onChange={onChange}/>}
 			<div className="la-2 la-s">
 				<h4>Role</h4>
-				<input ref={role} id={"role"} className="w3-input la-input" type="text" disabled={!enable} onKeyDown={(event => lat_onEnter(event, submit))}/>
+				<input ref={role}
+				       type="text"
+				       id={"role"}
+				       disabled={!enable}
+				       className="w3-input la-input"
+				       onKeyDown={(event => lat_onEnter(event, submit))}/>
 			</div>
 			<div className="la-l2 la-s">
 				<h4>&nbsp;</h4>
@@ -126,9 +134,8 @@ const MemberCreate = () => {
 				<button className={"w3-button w3-khaki w3-ripple"} onClick={onReload}>Reload</button>
 			</div>
 		</div>
-		<div className={"la-l8 la-s100"} id={resultBarId}></div>
-	</>;
+		<div id={resultBarId}></div>
+	</div>;
 };
 
 export default MemberCreate;
-;

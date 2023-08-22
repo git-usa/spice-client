@@ -545,7 +545,7 @@ export const _lady = {
 					const value  = head.toLowerCase() === "#" ? count : item[head];
 					const isDate = type && type.toLowerCase() === "date" && this._ladyDate(value);
 					const cell   = dataRow._tag("td", isDate ? `${isDate.dayMonthFormat}` : value);
-					if(onShow) onShow(cell, head, value, item, carry);
+					if(onShow) onShow(cell, item, carry, head, value);
 				}
 			);
 			

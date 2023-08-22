@@ -12,7 +12,7 @@ const LoadList = (of : string, title : string, cbResult : HandleResult, sendData
 		
 		if(Array.isArray(data) && data.length > 0){
 			sendData(data);
-			cbResult({type : "info", text : `Select A ${title}`});
+			cbResult({type : "info", text : `Please Select A ${title}`});
 		} else{
 			cbResult({type : "error", text : `No ${title} Found`});
 		}

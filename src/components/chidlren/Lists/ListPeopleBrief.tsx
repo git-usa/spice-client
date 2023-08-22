@@ -5,10 +5,10 @@ import {TypeListBrief, TypeListPeople} from "../../../modules/interfaces/TypeLis
 
 const ListPeopleBrief = ({list, cbComponent, title = "People List", id = "peopleTab", isBrief = true} : TypeListBrief & {isBrief? : boolean}) => {
 	
-	const includes = `name role login status createdAt ${isBrief ? "projects teams" : ""}`;
+	const includes = `name role login status createdAt ${isBrief ? "projects teams member" : ""}`;
 	
-	const onShow = (c : typeof _lady, h : string, v : any, i : TypeListPeople, carry : any) => {
-		if(!carry) return;
+	const onShow = (c : typeof _lady, i : TypeListPeople, carry : any, h : string, v : any) => {
+		if(!h) return;
 		if(h === "name"){
 			c._replace(`<a href="#">${v}</a>`)
 			 ._classes("w3-text-blue la-bold")

@@ -13,6 +13,7 @@ interface Type{
 
 const ProfileSwitch = ({of, profile, cbHandler} : Type) => {
 	switch(of){
+		case "member":
 		case "people":
 			return (<WrapComp msg={"Error in Profile People"}
 			                  component={<PeopleProfile cbHandler={cbHandler} profile={profile}/>}/>);

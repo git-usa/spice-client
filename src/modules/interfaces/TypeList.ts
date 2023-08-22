@@ -28,19 +28,52 @@ export interface TypeListPeople extends TypeList{
 	teams : number;
 }
 
+export interface TypeListMember{
+	id : string;
+	role : string;
+	status : string;
+	createdAt : Date;
+	team : TypeProfileMin;
+	member : TypeProfileMin;
+	project : TypeProfileMin;
+}
+
+export interface TypeListTask{
+	id : string;
+	member : string | TypeProfileMin;
+	team : string | TypeProfileMin;
+	project : string | TypeProfileMin;
+	creator? : string;
+	title : string;
+	category : string;
+	brief? : string;
+	status : string;
+}
+
+export interface TypeListTaskBrief extends TypeListTask{
+	member : TypeProfileMin;
+	team : TypeProfileMin;
+	project : TypeProfileMin;
+}
+
 export interface TypeListLog{
-	creator : TypeProfileMin,
+	creator : string | TypeProfileMin,
 	action : string,
 	path : string,
-	document : string,
+	document : string | TypeProfileMin & {title : string},
 	status : string,
 	brief : string,
 	createdAt : Date
 }
 
+export interface TypeListLogBrief extends TypeListLog{
+	creator : TypeProfileMin,
+	document : TypeProfileMin & {title : string},
+}
+
 export interface TypeListBrief{
 	id? : string;
 	title? : string;
-	list : (TypeListPeople | TypeListProject | TypeListTeam | TypeListLog)[];
+	list : (TypeListPeople | TypeListProject | TypeListTeam | TypeListMember | TypeListLogBrief | TypeListTaskBrief)[];
 	cbComponent : HandleComponentJax;
 }

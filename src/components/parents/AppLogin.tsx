@@ -2,7 +2,7 @@ import React from "react";
 import ResultBar from "../singles/ResultBar";
 import LoginNavBar from "../containers/LoginNavBar";
 import type TypeResult from "../../modules/interfaces/TypeResult";
-import {ModalLogin, showModalLogin} from "../containers/ModalLogin";
+import {ModalLogin, showModalLogin} from "../modals/ModalLogin";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
 import {lat_getCookie} from "../../modules/scripts/labject";
 

@@ -3,7 +3,7 @@ import _l from "../../../modules/scripts/_lady";
 import {TypeRender} from "../../../modules/interfaces/TypeAll";
 
 interface Type extends TypeRender{
-	list ?: any[];
+	list? : any[];
 }
 
 const ListRender = ({id = "listTab", list, includes, onShow, carry = true} : Type) => {
@@ -13,9 +13,11 @@ const ListRender = ({id = "listTab", list, includes, onShow, carry = true} : Typ
 			tab._error("No Record Found")._classes("la-shrink");
 			return;
 		}
-		tab._showData(list, null, includes, onShow, null, true,
-		              {createdAt : {input : "date"}}, false, carry
-		)._classes("w3-table-all");
+		
+		const schema = {createdAt : {input : "date"}};
+		
+		tab._showData(list, null, includes, onShow, null, true, schema, false, carry)
+		   ._classes("w3-table-all w3-cell-middle");
 	}, [list, id, includes, onShow, carry]);
 	
 	return <>

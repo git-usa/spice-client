@@ -2,7 +2,7 @@ import React from "react";
 import ResultBar from "../singles/ResultBar";
 import LoginNavBar from "../containers/LoginNavBar";
 import type TypeResult from "../../modules/interfaces/TypeResult";
-import {ModalLogin, showModalLogin} from "../containers/ModalLogin";
+import {ModalLogin, showModalLogin} from "../modals/ModalLogin";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
 
 const AppLogin = (props : {result : TypeResult, setRetry : () => void, cbAfterIn : (user : TypePeopleSession) => void}) => {
