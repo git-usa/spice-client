@@ -4,6 +4,7 @@ import {WrapComp} from "../../parents/WrapError";
 import PeopleProfile from "../People/PeopleProfile";
 import ProjectProfile from "../Projects/ProjectProfile";
 import {HandleComponentJax} from "../../../modules/interfaces/TypeJax";
+import ProfileSelf from "./ProfileSelf";
 
 interface Type{
 	of : string;
@@ -13,10 +14,16 @@ interface Type{
 
 const ProfileSwitch = ({of, profile, cbHandler} : Type) => {
 	switch(of){
+		
+		case "self":
+			return (<WrapComp msg={"Error in Profile People"}
+			                  component={<ProfileSelf cbHandler={cbHandler} profile={profile}/>}/>);
+		
 		case "member":
 		case "people":
 			return (<WrapComp msg={"Error in Profile People"}
 			                  component={<PeopleProfile cbHandler={cbHandler} profile={profile}/>}/>);
+			
 		case "project":
 		case "projects":
 			return (<WrapComp msg={"Error in Profile Project"}

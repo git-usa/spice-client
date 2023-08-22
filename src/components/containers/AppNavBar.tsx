@@ -23,7 +23,7 @@ const ShowLinks = ({classes} : {classes : string}) => {
 			      .map(v => <a href={navLinks[v]}
 			                   className={classes}
 			                   key={`loginNavBarLink${v}`}
-			                   onClick={() => cbHandler && cbHandler(v, {of : "people", by : user && user.id})}>{v}</a>)
+			                   onClick={() => cbHandler && cbHandler(v, {of : "self", by : user && user.id})}>{v}</a>)
 		}
 	</>;
 };

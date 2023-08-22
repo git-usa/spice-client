@@ -10,7 +10,6 @@ import JaxLogout from "../../modules/ajaxCalls/JaxLogout";
 import type TypeResult from "../../modules/interfaces/TypeResult";
 import type {HandleComponentJax} from "../../modules/interfaces/TypeJax";
 import {TypePeopleSession} from "../../modules/interfaces/TypePeople";
-import LogCreate from "../chidlren/Logs/LogCreate";
 
 const cbLogoutYes = (cbAfterOut : () => void, setResult : (result : TypeResult) => void) => {
 	const btnYes : HTMLButtonElement    = _ladEleById("btnLogoutYes");
@@ -55,9 +54,14 @@ const AppUi = ({user, cbAfterOut} : Type) => {
 		}
 	};
 	
+	const loadStart = {
+		cbHandler : handleComponentJax,
+		name      : user ? "profile" : "blank",
+		jax       : user ? {of : "self", by : user.id} : undefined
+	};
+	
 	// Main Component to be Loaded
-	const [component, setComponent] = useState(UseComponent(
-		{name : user ? "home" : "blank", cbHandler : handleComponentJax}));
+	const [component, setComponent] = useState(UseComponent(loadStart));
 	
 	return <>
 		{/* App Navigation Bar */}
